@@ -5,7 +5,7 @@
  
 1、格式： 
  
-$.ajax({
+	$.ajax({
                type:"get",
                url: page,
                data:{idd:idd},
@@ -25,7 +25,7 @@ $.ajax({
  
 2、获取参数： 
  
-@ResponseBody
+	@ResponseBody
 	@PutMapping("/member")
 	public String addCategory(@RequestBody Member member)  {
 		System.out.println("springboot接受到浏览器以JSON格式提交的数据：" + member);
