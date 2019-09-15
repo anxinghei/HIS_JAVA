@@ -5,7 +5,14 @@
  
 1、格式： 
  
-	$.ajax({
+$("#sender").click(function(){
+        var uesr_name=document.getElementById('uesr_name').value;
+        var password=document.getElementById('password').value;
+        var category={"uesr_name":uesr_name,"password":password};
+        var jsonData = JSON.stringify(category);
+        var idd=document.getElementById('idd').value;
+        var page="member3";
+        $.ajax({
                type:"get",
                url: page,
                data:{idd:idd},
@@ -21,7 +28,8 @@
                fail:function(result){
             	   $("#messageDiv").html("333333333333333");
                }
-            });  
+            }); 
+    }); 
  
 2、获取参数： 
  
