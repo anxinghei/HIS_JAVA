@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>登录</title>
+<!-- <script type="text/javascript" src="../../js/jquery.min.js"></script> -->
+<script src="http://how2j.cn/study/jquery.min.js"></script>
+</head>
+<body>
+    <form >
+       	用戶：<input type="text" id="uesr_name" /><br/>
+       	密碼：<input type="password" id="password" /><br/>
+       	密碼：<input type="text" id="idd" value="12" /><br/>
+        <input type="button" value="提交" id="sender" > 
+    </form>
+    <div id="messageDiv"></div>
+         
+    <script>
+    $("#sender").click(function(){
+        var uesr_name=document.getElementById('uesr_name').value;
+        var password=document.getElementById('password').value;
+        var category={"uesr_name":uesr_name,"password":password};
+        var jsonData = JSON.stringify(category);
+//         var page="member";
+        var idd=document.getElementById('idd').value;
+        var page="member3";
+        $.ajax({
+               type:"get",
+//                type:"put",
+               url: page,
+               data:{idd:idd},
+//                data:jsonData,
+//                dataType:"json",
+               contentType : "application/json;charset=UTF-8",
+               success: function(result){
+            	   $("#messageDiv").html("111111111111111");
+               },
+               error:function(result){
+            	   console.log("222222222222222");
+               },
+               fail:function(result){
+            	   $("#messageDiv").html("333333333333333");
+               }
+            }); 
+    });
+    </script>
+</body>
+     
+</html>
