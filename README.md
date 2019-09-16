@@ -9,8 +9,8 @@
                type:"get",
                url: page,
                data:{idd:idd},
-//                data:jsonData,
-//                dataType:"json",
+		//data:jsonData,
+		//dataType:"json",
                contentType : "application/json;charset=UTF-8",
                success: function(result){
             	   $("#messageDiv").html("111111111111111");
