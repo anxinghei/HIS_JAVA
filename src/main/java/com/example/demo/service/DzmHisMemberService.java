@@ -22,7 +22,13 @@ public class DzmHisMemberService  {
 		DzmHisMember record=new DzmHisMember();
 		record.setUserName(userName);
 		record.setPassword(password);
-		DzmHisMember member=memberMapper.selectOne(record);
-		return member;
+		return memberMapper.selectOne(record);
 	}
+	
+	public DzmHisMember findByName(String name) {
+		DzmHisMember record=new DzmHisMember();
+		record.setUserName(name);
+		return memberMapper.selectOne(record);
+	}
+
 }
