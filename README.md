@@ -43,4 +43,12 @@
 	public String Category3(@RequestParam("idd") int id) throws Exception {
 		System.out.println("111111111111111");
 		return "success";
-	}
+	} 
+ 
+## tk.mybatis≥¢ ‘ 
+1°¢“¿¿µ£∫ 
+	<dependency>
+    		<groupId>tk.mybatis</groupId>
+    		<artifactId>mapper</artifactId>
+    		<version>4.1.5</version>
+	</dependency>
