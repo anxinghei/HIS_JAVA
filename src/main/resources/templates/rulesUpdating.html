@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>权限集更新</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+ 
+<div class="showing">
+    <h2>
+       	修改<span th:text="${authGroup.title}" style="color:red"></span>权限
+    </h2>
+	<div th:each="firstRule:${rulesMulti}">
+		<div >
+			<div th:if="${firstRuleStat.odd}">
+				<input type="hidden" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}"  />
+			</div>
+			<div th:if="${firstRuleStat.even}">
+				<input type="radio" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}"  />
+			</div>
+		</div>
+	</div>
+</div>
+ 
+ 
+</body>
+ 
+</html>
