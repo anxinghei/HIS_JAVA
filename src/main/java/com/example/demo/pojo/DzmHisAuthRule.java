@@ -56,8 +56,17 @@ public class DzmHisAuthRule implements Serializable {
 	    //排序字段
     @Column(name = "order_list")
     private Integer orderList;
+    
+    @Transient
+    private boolean checked=false;
 	
 
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 	/**
 	 * 设置：
 	 */

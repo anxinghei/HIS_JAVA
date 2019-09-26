@@ -3,26 +3,32 @@
 <head>
     <title>权限集更新</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="../../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="../../js/vue.min.js" th:src="@{/js/vue.min.js}"></script>
 </head>
 <body>
- 
-<div class="showing">
+<div style="text-align:center">
     <h2>
        	修改<span th:text="${authGroup.title}" style="color:red"></span>权限
     </h2>
 	<div th:each="firstRule:${rulesMulti}">
 		<div >
 			<div th:if="${firstRuleStat.odd}">
-				<input type="hidden" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}"  />
+				<input type="hidden" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}"/><br/><br/>
 			</div>
 			<div th:if="${firstRuleStat.even}">
-				<input type="radio" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}"  />
+				<input type="radio" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}"  th:checked=${rule.checked}/><br/><br/>
 			</div>
 		</div>
 	</div>
 </div>
- 
- 
+
+<script>
+   	function isCheck(){
+   		return true;
+   	}
+</script>
+
 </body>
- 
+
 </html>
