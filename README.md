@@ -1,9 +1,9 @@
 # HIS_JAVA
  
  
-## AJAX³õÌåÑé 
+## AJAXåˆä½“éªŒ 
  
-1¡¢¸ñÊ½£º 
+1ã€æ ¼å¼ï¼š 
  
 	$.ajax({
                type:"get",
@@ -23,12 +23,12 @@
                }
             }); 
  
-2¡¢»ñÈ¡²ÎÊı£º 
+2ã€è·å–å‚æ•°ï¼š 
  
 	@ResponseBody
 	@PutMapping("/member")
 	public String addCategory(@RequestBody Member member)  {
-		System.out.println("springboot½ÓÊÜµ½ä¯ÀÀÆ÷ÒÔJSON¸ñÊ½Ìá½»µÄÊı¾İ£º" + member);
+		System.out.println("springbootæ¥å—åˆ°æµè§ˆå™¨ä»¥JSONæ ¼å¼æäº¤çš„æ•°æ®ï¼š" + member);
 		return "success";
 	}
 	@ResponseBody
@@ -45,27 +45,27 @@
 		return "success";
 	} 
  
-## tk.mybatis³¢ÊÔ 
+## tk.mybatiså°è¯• 
 
-1¡¢ÒÀÀµ£º 
+1ã€ä¾èµ–ï¼š 
 	<dependency>
     		<groupId>tk.mybatis</groupId>
     		<artifactId>mapper</artifactId>
     		<version>4.1.5</version>
 	</dependency> 
  
-## JQuery³õÌåÑé  
+## JQueryåˆä½“éªŒ  
 
-1¡¢»ñÈ¡ id=authGroup_id µÄÎÄ±¾Öµ£º  
+1ã€è·å– id=authGroup_id çš„æ–‡æœ¬å€¼ï¼š  
  	var authGroup_id = $("#authGroup_id").text(); 
 
-2¡¢»ñÈ¡¶à×éµ¥Ñ¡¿òµÄËùÓĞÑ¡ÖĞÖµ£º   
-	var rules = [];
-	$('input:radio:checked').each(function(){
-    		rules.push($(this).val());
-	}); 
+2ã€è·å–å¤šç»„å•é€‰æ¡†çš„æ‰€æœ‰é€‰ä¸­å€¼ï¼š   
+	var rules = [];  
+	$('input:radio:checked').each(function(){  
+    		rules.push($(this).val());  
+	});   
  
-3¡¢Ë¢ĞÂµ±Ç°Ò³Ãæ£º  
-	location.reload(true);// Ä¬ÈÏÎª false£¬´Ó¿Í»§¶Ë»º´æÀïÈ¡µ±Ç°Ò³¡£true, ÔòÒÔ GET ·½Ê½£¬´Ó·şÎñ¶ËÈ¡×îĞÂµÄÒ³Ãæ, Ïàµ±ÓÚ¿Í»§¶Ëµã»÷ F5("Ë¢ĞÂ") 
+3ã€åˆ·æ–°å½“å‰é¡µé¢ï¼š  
+	location.reload(true);// é»˜è®¤ä¸º falseï¼Œä»å®¢æˆ·ç«¯ç¼“å­˜é‡Œå–å½“å‰é¡µã€‚true, åˆ™ä»¥ GET æ–¹å¼ï¼Œä»æœåŠ¡ç«¯å–æœ€æ–°çš„é¡µé¢, ç›¸å½“äºå®¢æˆ·ç«¯ç‚¹å‡» F5("åˆ·æ–°") 
  
-4¡¢
+4ã€
