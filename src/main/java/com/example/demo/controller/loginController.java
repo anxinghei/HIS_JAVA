@@ -57,20 +57,4 @@ public class loginController {
 	public String toHome() {
 		return "home";
 	}
-	
-	@ResponseBody
-	@GetMapping("/member2/{idd}")
-	public String Category(@PathVariable("idd") int id) throws Exception {
-		System.out.println("111111111111111");
-		return "success";
-	}
-	
-	@ResponseBody
-	@GetMapping("/member3")
-	public String Category3(@RequestParam("idd") int id) throws Exception {
-		System.out.println("111111111111111");
-		return "success";
-	}
-
-
 }

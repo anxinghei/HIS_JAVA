@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>权限集更新</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="../../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="../../js/vue.min.js" th:src="@{/js/vue.min.js}"></script>
+</head>
+<body>
+<div>
+    <h2>
+    	<span th:text="${authGroup.id}" id="authGroup_id" hidden=true></span>
+       	修改<span th:text="${authGroup.title}" style="color:red" id="authGroup_title"></span>权限
+    </h2>
+    
+	<div th:each="firstRule:${rulesMulti}">
+		<div >
+			<div th:if="${firstRuleStat.odd}">
+				<input type="hidden" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}"/><br/><br/>
+			</div>
+			<div th:if="${firstRuleStat.even}">
+				<input type="checkbox" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}" th:attr="checked=${rule.checked}" / ><br/><br/>
+			</div>
+		</div>
+	</div>
+	<button type="submit" id="summit">确定修改</button>
+</div>
+
+<script>
+    $(function () {
+    	$("#summit").click(function() {
+            var authGroup_id = $("#authGroup_id").text();
+            var authGroup_title = $("#authGroup_title").text();
+            var rules = [];
+			$('input:checkbox:checked').each(function(){
+    			rules.push($(this).val());
+    			console.log($(this).val());
+			});
+// 			alert(authGroup_id);
+			var page="UpdateRules/"+authGroup_id+"?rules="+rules;
+			$.ajax({
+	               type:"post",
+	               url: page,
+	               data:{authGroup_id:authGroup_id,rules:rules},
+	               contentType : "application/json;charset=UTF-8",
+	               success: function(result){
+	            	   location.reload(true);// 默认为 false，从客户端缓存里取当前页。true, 则以 GET 方式，从服务端取最新的页面, 相当于客户端点击 F5("刷新")
+	            	   alert("权限组 "+authGroup_title+" 已完成权限的更新");
+	               },
+	               error:function(result){
+	            	   location.reload();
+	            	   alert("操作出错啦！请联系管理人员");
+	               },
+	               fail:function(result){
+	            	   location.reload();
+	            	   alert("由于网络不顺畅等原因，无法执行本次操作");
+	               }
+	        }); 
+        })  
+    })
+</script>
+
+</body>
+
+</html>

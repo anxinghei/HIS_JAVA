@@ -1,36 +1,52 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.pojo.DzmHisAuthGroup;
 import com.example.demo.pojo.DzmHisAuthRule;
+import com.example.demo.pojo.DzmHisMember;
 import com.example.demo.service.DzmHisAuthGroupService;
 import com.example.demo.service.DzmHisAuthRuleService;
 import com.example.demo.util.baiscData;
 
 @Controller
-public class DzmHisAuthRuleController {
+public class DzmHisAuthGroupController {
 
 	@Autowired
 	private DzmHisAuthRuleService ruleService;
 	@Autowired
 	private DzmHisAuthGroupService authGroupService;
 	
+	@RequestMapping("listGroups")
+	public String listGroups(Model model) {
+		List<DzmHisAuthGroup> groups=authGroupService.getAllGroups();
+		model.addAttribute("groups", groups);
+		return "rules/listGroups";
+	}
+	
 	@RequestMapping("toUpdateRules")
-	public String toUpdateRules(Model model) {
+	public String toUpdateRules(Model model,Integer id) {
 // 得到修改权限集的角色
-		DzmHisAuthGroup authGroup=authGroupService.findById(5);
+		DzmHisAuthGroup authGroup=authGroupService.findById(id);
 		model.addAttribute("authGroup", authGroup);
 		// 得到角色的权限集：String-->int[]
 		String authString=authGroup.getRules();
 		authString=authString.substring(1);
-		System.out.println(authString);
 		String[] ruleStrings=authString.split(",");
 		int[] rulesInt=new int[ruleStrings.length];
 		for (int i = 0; i < ruleStrings.length; i++) {
@@ -63,7 +79,41 @@ public class DzmHisAuthRuleController {
 			rulesMulti.add(secondRules);
 		}
 		model.addAttribute("rulesMulti", rulesMulti);
-		return "rulesUpdating";
+		return "rules/editRules";
+	}
+
+	@RequestMapping(value = "/UpdateRules/{authGroup_id}",method = RequestMethod.POST)
+	@ResponseBody
+	public String updateRules(@PathVariable("authGroup_id") int authGroup_id,@RequestParam("rules") int[] rules) {
+		Set set=new TreeSet();
+		List<DzmHisAuthRule> rulesList=new ArrayList<DzmHisAuthRule>();
+		int ruleID;
+		DzmHisAuthRule rule=new DzmHisAuthRule();
+		for (int i = 0; i < rules.length; i++) {
+			ruleID=rules[i];
+			// 父权限
+			rule=ruleService.findById(ruleID);
+			set.add(rule.getPid());
+			// 选中的权限
+			set.add(ruleID);
+			// 子权限
+			rulesList=ruleService.getRulesByPropety("pid",ruleID);
+			for (DzmHisAuthRule dzmHisAuthRule : rulesList) {
+				set.add(dzmHisAuthRule.getId());
+			}
+        }
+		// 得到权限集:int[]-->String
+		String ruleString="";
+		Iterator iterator=set.iterator();
+		while (iterator.hasNext()) {
+			ruleString+=","+iterator.next();
+		}
+		// 更新权限组
+		DzmHisAuthGroup authGroup=new DzmHisAuthGroup();
+		authGroup.setId(authGroup_id);
+		authGroup.setRules(ruleString);
+		authGroupService.updateGroup(authGroup);
+		return "success";
 	}
 }
 

@@ -8,11 +8,8 @@
 <h3 th:text="${name}"></h3>
 
 <hr/>
-<div shiro:hasPermission="Doctor:index">
-进入用户添加功能： <a href="add">用户添加</a><br/>
-</div>
-<div shiro:hasPermission="user:update">
-进入用户更新功能： <a href="update">用户更新</a><br/>
+<div shiro:hasPermission="AuthGroup:editRuleGroup">
+<a href="listGroups">权限修改</a><br/>
 </div>
 <a href="login">登录</a>
 </body>

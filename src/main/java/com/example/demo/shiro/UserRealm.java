@@ -58,20 +58,16 @@ public class UserRealm extends AuthorizingRealm{
 		DzmHisMember member = (DzmHisMember)subject.getPrincipal();
 		// 得到当前用户的权限类别
 		int typeById =member.getType();
-		System.out.println("1111111111111111111111111111111111111111111111111111111111111111111111111111111111");
-		System.out.println(typeById);
 		DzmHisAuthGroup authGroup=authGroupService.findById(typeById);
 		// 得到当前用户权限类别的具体权限序列
 		String rules=authGroup.getRules();
-		System.out.println("2222222222222222222222222222222222222222222222222222222222222222222222222222222222");
-		System.out.println(rules);
+		rules=rules.substring(1);
 		if (rules!=null || !rules.isEmpty()) {
 			// 拆分权限序列，得到具体权限
 			String[] ruleStrings=rules.split(",");
 			int id;
 			DzmHisAuthRule authRule;
 			String rule;
-			System.out.println("3333333333333333333333333333333333333333333333333333333333333333333333333333333333");
 			for (int i = 0; i < ruleStrings.length; i++) {
 				id=Integer.parseInt(ruleStrings[i]);
 				authRule=authRuleService.findById(id);
@@ -79,7 +75,6 @@ public class UserRealm extends AuthorizingRealm{
 				rule=rule.replace("/", ":");
 				info.addStringPermission(rule);
 			}
-			System.out.println();
 		}
 		try {
             //不确定是什么原因导致权限可能会生成一个空值"", 会报错,所以将空值删除

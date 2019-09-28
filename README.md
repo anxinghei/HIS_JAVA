@@ -46,9 +46,26 @@
 	} 
  
 ## tk.mybatis尝试 
+
 1、依赖： 
 	<dependency>
     		<groupId>tk.mybatis</groupId>
     		<artifactId>mapper</artifactId>
     		<version>4.1.5</version>
-	</dependency>
+	</dependency> 
+ 
+## JQuery初体验  
+
+1、获取 id=authGroup_id 的文本值：  
+ 	var authGroup_id = $("#authGroup_id").text(); 
+
+2、获取多组单选框的所有选中值：   
+	var rules = [];
+	$('input:radio:checked').each(function(){
+    		rules.push($(this).val());
+	}); 
+ 
+3、刷新当前页面：  
+	location.reload(true);// 默认为 false，从客户端缓存里取当前页。true, 则以 GET 方式，从服务端取最新的页面, 相当于客户端点击 F5("刷新") 
+ 
+4、

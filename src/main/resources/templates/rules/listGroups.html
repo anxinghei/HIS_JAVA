@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="../../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<title>权限分组</title>
+</head>
+<body>
+	<table border='1' cellspacing='0' align="center">
+		<tr>
+			<td width="20px" align="center">id</td>
+			<td width="70px" align="center">组别</td>
+			<td >操作</td>
+		</tr>
+		<tr th:each="group: ${groups}">
+			<td th:text="${groupStat.index}" width="20px" align="center"></td>
+			<td th:text="${group.title}" width="70px" align="center"></td>
+			<td >
+				<a th:if="${group.id!=1}" th:href="@{/toUpdateRules(id=${group.id})}" rel="noopener" >修改权限</a>
+				
+			</td>
+		</tr>
+	</table>
+
+</body>
+</html>
