@@ -66,6 +66,7 @@
 	});   
  
 3、刷新当前页面：  
-	location.reload(true);// 默认为 false，从客户端缓存里取当前页。true, 则以 GET 方式，从服务端取最新的页面, 相当于客户端点击 F5("刷新") 
+	location.reload(true);  
+	// 默认为 false，从客户端缓存里取当前页。true, 则以 GET 方式，从服务端取最新的页面, 相当于客户端点击 F5("刷新") 
  
 4、
