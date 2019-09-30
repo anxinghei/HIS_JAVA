@@ -24,12 +24,22 @@ import com.example.demo.pojo.DzmHisMember;
 public class loginController {
 
 	@RequestMapping(value="/login",method = RequestMethod.GET)
-	public String toLogin() {
+	public String toLogin(Model model) {
+		Subject subject = SecurityUtils.getSubject();	
+		System.out.println(subject.isRemembered());
+		System.out.println(subject.isAuthenticated());
+		if(subject.isRemembered()){
+			System.out.println("-------------------------------------------------");
+            System.out.println("认证成功");
+            DzmHisMember member = (DzmHisMember)subject.getPrincipal();
+            model.addAttribute("member",member);
+            return "redirect:/toHome";
+        }
 		return "login";
 	}
 
 	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public String login(String userName,String password,Model model)  {
+	public String login(String userName,String password,boolean rememberMe,Model model)  {
 		/**
 		 * 使用Shiro编写认证操作
 		 */
@@ -39,6 +49,8 @@ public class loginController {
 		UsernamePasswordToken token = new UsernamePasswordToken(userName,password);
 //3.执行登录方法
 		try {
+			System.out.println(rememberMe);
+			token.setRememberMe(rememberMe);
 			subject.login(token);
 			//登录成功，跳转到主页面
 			return "redirect:/toHome";

@@ -4,7 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,15 +45,18 @@ public class ShiroConfig {
 		
 		//放行login.html页面
 		filterMap.put("/login", "anon");
-		//授权过滤器
-		//注意：当前授权拦截后，shiro会自动跳转到未授权页面
-//		filterMap.put("/add", "perms[user:add]");
-//		filterMap.put("/update", "perms[user:update]");
-		
-		filterMap.put("/*", "authc");
-		
 		//修改调整的登录页面
 		shiroFilterFactoryBean.setLoginUrl("/login");
+		// 登录成功后要跳转的链接
+        shiroFilterFactoryBean.setSuccessUrl("/toHome");
+       //配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
+        filterMap.put("/logout", "logout");
+        
+        //rememberMe 登录即可访问
+        filterMap.put("/toHome", "user");
+        
+        //<!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
+		filterMap.put("/*", "authc");
 		//设置未授权提示页面
 		shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
 		
@@ -69,6 +74,8 @@ public class ShiroConfig {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		//关联realm
 		securityManager.setRealm(userRealm);
+		//使用记住我
+		securityManager.setRememberMeManager(rememberMeManager());
 		return securityManager;
 	}
 	
@@ -87,4 +94,32 @@ public class ShiroConfig {
 	public ShiroDialect getShiroDialect(){
 		return new ShiroDialect();
 	}
+	
+	/**
+     * cookie对象;
+     * @return
+     */
+    public SimpleCookie rememberMeCookie(){
+        //这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
+        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+        //cookie生效时间30天,单位秒;
+        simpleCookie.setMaxAge(2592000);
+        return simpleCookie;
+    }
+
+    /**
+     * cookie管理对象;记住我功能
+     * @return
+     */
+    public CookieRememberMeManager rememberMeManager(){
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        cookieRememberMeManager.setCookie(rememberMeCookie());
+        // cookieRememberMeManager.setCipherKey用来设置加密的Key,参数类型byte[],字节数组长度要求16
+        // cookieRememberMeManager.setCipherKey(Base64.decode("3AvVhmFLUs0KTA3Kprsdag=="));
+       cookieRememberMeManager.setCipherKey("ZHANGXIAOHEI_CAT".getBytes());
+        return cookieRememberMeManager;
+    }
+
 }
+
+
