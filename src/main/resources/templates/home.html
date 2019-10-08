@@ -2,15 +2,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript" src="../../js/jquery.min.js"
+	th:src="@{/js/jquery.min.js}"></script>
+<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.min.css}" />
+<script type="text/javascript" src="../../js/bootstrap.min.js"
+	th:src="@{/js/bootstrap.min.js}"></script>
 <title>主页面</title>
 </head>
 <body>
-<h3 th:text="${name}"></h3>
-
-<hr/>
-<div shiro:hasPermission="AuthGroup:editRuleGroup">
-<a href="listGroups">权限修改</a><br/>
-</div>
-<a href="login">登录</a>
+	<div shiro:hasPermission="AuthGroup:editRuleGroup">
+		<a href="listGroups">权限修改</a><br/>
+	</div>
+	<a href="logout">退出登录</a>
+	
+	<script> 
+    $("#updateRules").click(function(){ 
+        var page="listGroups"; 
+        $.ajax({ 
+               type:"get", 
+               url: page, 
+               data:{}, 
+               contentType : "application/json;charset=UTF-8", 
+               success: function(result){ 
+            	   console.log("111111111111111"); 
+               }, 
+               error:function(result){ 
+            	   console.log("222222222222222"); 
+               }, 
+               fail:function(result){ 
+            	   console.log("333333333333333"); 
+               } 
+            });  
+    }); 
+    </script>
+	
 </body>
 </html>

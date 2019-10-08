@@ -26,8 +26,6 @@ public class loginController {
 	@RequestMapping(value="/login",method = RequestMethod.GET)
 	public String toLogin(Model model) {
 		Subject subject = SecurityUtils.getSubject();	
-		System.out.println(subject.isRemembered());
-		System.out.println(subject.isAuthenticated());
 		if(subject.isRemembered()){
 			System.out.println("-------------------------------------------------");
             System.out.println("认证成功");

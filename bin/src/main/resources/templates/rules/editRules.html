@@ -19,7 +19,7 @@
 				<input type="hidden" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}"/><br/><br/>
 			</div>
 			<div th:if="${firstRuleStat.even}">
-				<input type="checkbox" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}" th:attr="checked=${rule.checked}"/><br/><br/>
+				<input type="checkbox" th:each="rule:${firstRule}" th:value="${rule.id}"  th:text="${rule.title}" th:attr="checked=${rule.checked}" / ><br/><br/>
 			</div>
 		</div>
 	</div>
