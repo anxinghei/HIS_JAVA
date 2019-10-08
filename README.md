@@ -80,5 +80,5 @@
   
 1、引用文件  
 	<script type="text/javascript" src="../../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>  
-	1<link type="text/css" href="css/bootstrap.min.css"  rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>  
+	link type="text/css" href="css/bootstrap.min.css"  rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>  
 	<script type="text/javascript" src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
