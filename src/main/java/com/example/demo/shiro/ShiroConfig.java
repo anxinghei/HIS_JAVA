@@ -45,6 +45,7 @@ public class ShiroConfig {
 		
 		//放行login.html页面
 		filterMap.put("/login", "anon");
+		filterMap.put("/getCode","anon");
 		//修改调整的登录页面
 		shiroFilterFactoryBean.setLoginUrl("/login");
 		// 登录成功后要跳转的链接

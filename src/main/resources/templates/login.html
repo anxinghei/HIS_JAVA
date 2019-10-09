@@ -12,9 +12,18 @@
     <form method="post" action="login">
        	用戶：<input type="text" id="userName" name="userName"/><br/>
        	密碼：<input type="password" id="password" name="password"/><br/>
+       	验证码：<input type="text" name="verifyCode" placeholder="请输入验证码"><br>
+    		<a href="#" style="color: blue" onclick="refreshCode()">换一个</a>
+    		<img id="verifyCode" src="/hospital/getCode" style="margin-left: 16px"><br>
        	<input type="checkbox" name="rememberMe">记住用户<br>
         <button type="submit" class="btn btn-primary">登陆</button>
     </form>
+ 
+<script>
+    function refreshCode() {
+        document.getElementById("verifyCode").setAttribute("src","/hospital/getCode");
+    }
+</script>
 </body>
      
 </html>

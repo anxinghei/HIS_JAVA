@@ -11,11 +11,12 @@
 <title>主页面</title>
 </head>
 <body>
+	<div th:text="${member.userName}" style="color: green"></div>
+	<a href="logout">退出登录</a>
 	<div shiro:hasPermission="AuthGroup:editRuleGroup">
 		<a href="listGroups">权限修改</a><br/>
 	</div>
-	<a href="logout">退出登录</a>
-	
+
 	<script> 
     $("#updateRules").click(function(){ 
         var page="listGroups"; 
