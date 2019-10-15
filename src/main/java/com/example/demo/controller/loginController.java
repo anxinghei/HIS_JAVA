@@ -125,7 +125,7 @@ public class loginController {
         responseOutputStream.close();
     }
     
-    @RequestMapping("/aa")
+    @RequestMapping("/test")
     @ResponseBody
     public void syso() {
     	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
