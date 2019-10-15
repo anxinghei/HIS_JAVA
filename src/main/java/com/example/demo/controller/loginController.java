@@ -124,4 +124,10 @@ public class loginController {
         responseOutputStream.flush();
         responseOutputStream.close();
     }
+    
+    @RequestMapping("/aa")
+    @ResponseBody
+    public void syso() {
+    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    }
 }
