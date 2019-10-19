@@ -104,9 +104,7 @@ public class UserRealm extends AuthorizingRealm{
 		//编写shiro判断逻辑，判断用户名和密码
 		//1.判断用户名
 		UsernamePasswordToken token = (UsernamePasswordToken)arg0;
-		
 		DzmHisMember member = memberService.findByName(token.getUsername());
-		
 		if(member==null){
 			//用户名不存在
 			return null;//shiro底层会抛出UnKnowAccountException

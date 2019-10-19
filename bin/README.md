@@ -1,4 +1,4 @@
-# HIS_JAVA
+﻿# HIS_JAVA
  
  
 ## AJAX初体验 
@@ -69,4 +69,16 @@
 	location.reload(true);  
 	// 默认为 false，从客户端缓存里取当前页。true, 则以 GET 方式，从服务端取最新的页面, 相当于客户端点击 F5("刷新") 
  
-4、
+4、  
+  
+## Thymeleaf 补充  
+  
+1、<link/>  
+	<link type="text/css" href="css/bootstrap.min.css"  rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>  
+  
+## bootStrap初体验  
+  
+1、引用文件  
+	<script type="text/javascript" src="../../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>  
+	link type="text/css" href="css/bootstrap.min.css"  rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>  
+	<script type="text/javascript" src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>

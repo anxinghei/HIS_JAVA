@@ -59,7 +59,7 @@ public class loginController {
 //1.获取Subject
 		Subject subject = SecurityUtils.getSubject();	
 //2.封装用户数据
-		UsernamePasswordToken token = new UsernamePasswordToken(userName,password);
+		UsernamePasswordToken token = new UsernamePasswordToken(userName,password,rememberMe);
 //3.执行登录方法
 		// 获取session中的验证码
         String verCode = (String) subject.getSession().getAttribute(SHIRO_VERIFY_SESSION);
