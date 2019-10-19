@@ -89,6 +89,7 @@ public class loginController {
 		Subject subject = SecurityUtils.getSubject();
 		DzmHisMember member = (DzmHisMember)subject.getPrincipal();
         model.addAttribute("member",member);
+        
 		return "home";
 	}
 	
@@ -127,7 +128,7 @@ public class loginController {
     
     @RequestMapping("/test")
     @ResponseBody
-    public void syso() {
+    public void test() {
     	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
 }
