@@ -73,8 +73,8 @@
   
 ## Thymeleaf 补充  
   
-1、<link/>  
-	<link type="text/css" href="css/bootstrap.min.css"  rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>  
+1、<link>  
+	link type="text/css" href="css/bootstrap.min.css"  rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>  
   
 ## bootStrap初体验  
   
