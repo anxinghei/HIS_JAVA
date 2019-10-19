@@ -46,12 +46,7 @@ public class DzmHisAuthGroupController {
 		model.addAttribute("authGroup", authGroup);
 		// 得到角色的权限集：String-->int[]
 		String authString=authGroup.getRules();
-		authString=authString.substring(1);
-		String[] ruleStrings=authString.split(",");
-		int[] rulesInt=new int[ruleStrings.length];
-		for (int i = 0; i < ruleStrings.length; i++) {
-			rulesInt[i]=Integer.parseInt(ruleStrings[i]);
-		}
+		int[] rulesInt=baiscData.splitString(authString);
 		
 // 得到一级菜单
 		List<DzmHisAuthRule> firstRules=ruleService.getRulesByPropety("pid",0);

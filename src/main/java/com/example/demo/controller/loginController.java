@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -27,8 +28,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.pojo.DzmHisAuthGroup;
+import com.example.demo.pojo.DzmHisAuthRule;
 import com.example.demo.pojo.DzmHisMember;
+import com.example.demo.service.DzmHisAuthGroupService;
+import com.example.demo.service.DzmHisAuthRuleService;
 import com.example.demo.util.KaptchaConfig;
+import com.example.demo.util.baiscData;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 
 @Controller
@@ -37,6 +43,10 @@ public class loginController {
 	private String SHIRO_VERIFY_SESSION = "verifySessionCode";
 	@Autowired
     private DefaultKaptcha defaultKaptcha;
+	@Autowired
+	private DzmHisAuthGroupService authGroupService;
+	@Autowired
+	private DzmHisAuthRuleService ruleService;
 	
 	@RequestMapping(value="/login",method = RequestMethod.GET)
 	public String toLogin(Model model) {
@@ -86,10 +96,29 @@ public class loginController {
 	
 	@RequestMapping("/toHome")
 	public String toHome(Model model) {
+		// 得到当前用户
 		Subject subject = SecurityUtils.getSubject();
 		DzmHisMember member = (DzmHisMember)subject.getPrincipal();
         model.addAttribute("member",member);
-        
+        int groupId=member.getType();
+        DzmHisAuthGroup authGroup=authGroupService.findById(groupId);
+        // 得到角色的权限集：String-->int[]
+     	String authString=authGroup.getRules();
+     	int[] rulesInt=baiscData.splitString(authString);
+     	// 划分一二级菜单
+     	List<DzmHisAuthRule> firstRules=new ArrayList<DzmHisAuthRule>();
+     	List<DzmHisAuthRule> secondRules=new ArrayList<DzmHisAuthRule>();
+     	DzmHisAuthRule authRule=new DzmHisAuthRule();
+     	for (int i = 0; i < rulesInt.length; i++) {
+     		authRule=ruleService.findById(rulesInt[i]);
+     		if (0==authRule.getPid()) {
+				firstRules.add(authRule);
+			}else {
+				secondRules.add(authRule);
+			}
+		}
+     	model.addAttribute("firstRules",firstRules);
+     	model.addAttribute("secondRules",secondRules);
 		return "home";
 	}
 	
