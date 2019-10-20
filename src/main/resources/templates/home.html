@@ -20,58 +20,15 @@
 				<a href="logout">退出登录</a>
 			</h4>
 		</div>
-	</div>
+	</div><br/><br/>
 
-	<ul id="myTab" class="nav nav-tabs">
-		<li class="dropdown"><a href="#" id="myTabDrop1"
-			class="dropdown-toggle" data-toggle="dropdown">其他类似游戏 <b
-				class="caret"></b>
-		</a>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-				<li><a href="#storm" tabindex="-1" data-toggle="tab">风暴英雄</a></li>
-				<li><a href="#h300" tabindex="-1" data-toggle="tab">300英雄</a></li>
-			</ul></li>
-	</ul>
-	<div id="myTabContent" class="tab-content">
-		<div class="tab-pane fade" id="storm">
-			<p>《风暴英雄》 是由暴雪娱乐公司开发的一款运行在Windows和Mac OS上的在线多人竞技PC游戏。</p>
-			<p>
-				游戏中的英雄角色主要来自于暴雪三大经典游戏系列：《魔兽世界》、《暗黑破坏神》和《星际争霸》。它是一款道具收费的游戏，与《星际争霸Ⅱ》基于同一引擎开发。
-			</p>
-		</div>
-		<div class="tab-pane fade" id="h300">
-			<p>《300英雄》是由上海跳跃网络科技有限公司自主研发，深圳中青宝互动网络股份有限公司运营的一款类DOTA网游。游戏以7v7组队对抗玩法为主，提供永恒战场和永恒竞技场两种经典模式任由玩家选择，并创新性地加入勇者斗恶龙、克隆战争等多种休闲娱乐玩法。
-			</p>
-		</div>
-	</div>
-
-	<div style="height: 50px"></div>
+	
 
 	<div shiro:hasPermission="AuthGroup:editRuleGroup">
 		<a href="listGroups">权限修改</a><br />
 	</div>
 	<a href="test">test</a>
 	<br />
-	<script>
-		$("#updateRules").click(function() {
-			var page = "listGroups";
-			$.ajax({
-				type : "get",
-				url : page,
-				data : {},
-				contentType : "application/json;charset=UTF-8",
-				success : function(result) {
-					console.log("111111111111111");
-				},
-				error : function(result) {
-					console.log("222222222222222");
-				},
-				fail : function(result) {
-					console.log("333333333333333");
-				}
-			});
-		});
-	</script>
 
 </body>
 </html>

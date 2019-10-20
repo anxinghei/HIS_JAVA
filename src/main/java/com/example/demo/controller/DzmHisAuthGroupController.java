@@ -22,7 +22,10 @@ import com.example.demo.pojo.DzmHisAuthRule;
 import com.example.demo.pojo.DzmHisMember;
 import com.example.demo.service.DzmHisAuthGroupService;
 import com.example.demo.service.DzmHisAuthRuleService;
+import com.example.demo.shiro.UserRealm;
 import com.example.demo.util.baiscData;
+
+import redis.clients.jedis.Jedis;
 
 @Controller
 public class DzmHisAuthGroupController {
@@ -33,7 +36,7 @@ public class DzmHisAuthGroupController {
 	private DzmHisAuthGroupService authGroupService;
 	
 	@RequestMapping("listGroups")
-	public String listGroups(Model model) {
+	public String editRuleGroup(Model model) {
 		List<DzmHisAuthGroup> groups=authGroupService.getAllGroups();
 		model.addAttribute("groups", groups);
 		return "rules/listGroups";
@@ -108,6 +111,8 @@ public class DzmHisAuthGroupController {
 		authGroup.setId(authGroup_id);
 		authGroup.setRules(ruleString);
 		authGroupService.updateGroup(authGroup);
+		// 若当前用户有权限修改的权限，其又将该权限删除，由于缓存的缘故，在其在线时仍拥有该权限
+		// 解决办法：1、清除缓存	  2、权限修改的权限只由管理员持有，而管理员权限无法修改
 		return "success";
 	}
 }
