@@ -35,4 +35,7 @@ public class DzmHisAuthGroupService {
 	public void updateGroup(DzmHisAuthGroup authGroup) {
 		authGroupMapper.updateByPrimaryKeySelective(authGroup);
 	}
+	public void addGroup(DzmHisAuthGroup authGroup) {
+		authGroupMapper.insert(authGroup);
+	}
 }

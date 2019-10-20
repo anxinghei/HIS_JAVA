@@ -35,11 +35,28 @@ public class DzmHisAuthGroupController {
 	@Autowired
 	private DzmHisAuthGroupService authGroupService;
 	
+	@RequestMapping("toGroups")
+	public String toIndex(Model model) {
+		return "rulesGroup/index";
+	}
+	
+	@RequestMapping("addGroups")
+	@ResponseBody
+	public String addGroups(Model model,@RequestParam("title")String title) {
+		DzmHisAuthGroup authGroup=new DzmHisAuthGroup();
+		authGroup.setTitle(title);
+		authGroup.setStatus(1);
+		authGroup.setIsManage(1);
+		authGroup.setRules(",1");
+		authGroupService.addGroup(authGroup);
+		return "success";
+	}
+	
 	@RequestMapping("listGroups")
 	public String editRuleGroup(Model model) {
 		List<DzmHisAuthGroup> groups=authGroupService.getAllGroups();
 		model.addAttribute("groups", groups);
-		return "rules/listGroups";
+		return "rulesGroup/listGroups";
 	}
 	
 	@RequestMapping("toUpdateRules")
@@ -77,7 +94,7 @@ public class DzmHisAuthGroupController {
 			rulesMulti.add(secondRules);
 		}
 		model.addAttribute("rulesMulti", rulesMulti);
-		return "rules/editRules";
+		return "rulesGroup/editRules";
 	}
 
 	@RequestMapping(value = "/UpdateRules/{authGroup_id}",method = RequestMethod.POST)

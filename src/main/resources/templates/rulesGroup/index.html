@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>权限组修改</title>
+<script type="text/javascript" src="../../js/jquery.min.js"
+	th:src="@{/js/jquery.min.js}"></script>
+<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.min.css}" />
+<script type="text/javascript" src="../../js/bootstrap.min.js"
+	th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<a href="toHome">返回</a>
+	<br />
+	<br />
+	<div>
+		<div >
+			<button
+				onclick="window.location.href = 'http://localhost:8080/hospital/listGroups'" class="btn btn-primary">权限修改
+			</button><br /><br />
+		</div>
+		<div shiro:hasPermission="AuthGroup:addRuleGroup">
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#addRuleGroup">增加权限组
+			</button>
+		</div>
+		
+	</div>
+
+	<div class="modal fade bs-example-modal-sm" id="addRuleGroup"
+		tabindex="-1" role="dialog" aria-labelledby="addRuleGroupLabel">
+		<div class="modal-dialog">
+			<div class="modal-content" >
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">增加权限组</h4>
+				</div>
+				<div class="pd20">
+					<div class="input-group listSeaForm mt10 wb100">
+						<span class="input-group-btn"> 
+							<span class="btn">权限组名称：</span>
+						</span> 
+						<input class="form-control" type="text" value="" id="title" placeholder="请填写权限组名称">
+					</div>
+				</div>
+				<div class="pd20">
+					<button type="button" class="btn btn-primary wb100" id="addGroup">添加</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+<script type="text/javascript">
+
+$('#addGroup').click(function() {
+	var title = $("#title").val();
+	var page="addGroups?title="+title;
+	$.ajax({
+           type:"post",
+           url: page,
+           data:{title:title},
+           contentType : "application/json;charset=UTF-8",
+           success: function(result){
+        	   location.reload(true);
+        	   alert("权限组 "+title+" 已添加");
+           },
+           error:function(result){
+        	   location.reload();
+        	   alert("操作出错啦！请联系管理人员");
+           },
+           fail:function(result){
+        	   location.reload();
+        	   alert("由于网络不顺畅等原因，无法执行本次操作");
+           }
+    }); 
+});
+
+</script>	
+</body>
+</html>

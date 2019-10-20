@@ -82,9 +82,9 @@ public class ShiroConfig {
 		//使用记住我
 		securityManager.setRememberMeManager(rememberMeManager());
 		// 自定义缓存实现 使用redis
-        securityManager.setCacheManager(cacheManager());
+//        securityManager.setCacheManager(cacheManager());
         // 自定义session管理 使用redis
-        securityManager.setSessionManager(SessionManager());
+//        securityManager.setSessionManager(SessionManager());
 		return securityManager;
 	}
 	
