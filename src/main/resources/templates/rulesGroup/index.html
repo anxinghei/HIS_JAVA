@@ -14,24 +14,40 @@
 	<a href="toHome">返回</a>
 	<br />
 	<br />
-	<div>
-		<div >
-			<button
-				onclick="window.location.href = 'http://localhost:8080/hospital/listGroups'" class="btn btn-primary">权限修改
-			</button><br /><br />
-		</div>
-		<div shiro:hasPermission="AuthGroup:addRuleGroup">
-			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#addRuleGroup">增加权限组
-			</button>
-		</div>
-		
+	<div shiro:hasPermission="AuthGroup:addRuleGroup">
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#addRuleGroup">增加权限组</button>
 	</div>
+	<table
+		class="table-striped table-bordered table-hover  table-condensed">
+		<thead>
+			<th width="30px" style="text-align: center;">id</th>
+			<th width="70px" style="text-align: center;">组别</th>
+			<th style="text-align: center;">操作</th>
+		</thead>
+		<tbody>
+			<tr th:each="group: ${groups}">
+				<td th:text="${groupStat.index+1}" width="20px" align="center"></td>
+				<td th:text="${group.title}" width="70px" align="center"></td>
+				<td>
+					<button type='button' class='btn btn-default btn-sm mr10 toNANBtn'
+						th:if="${group.id!=1}">修改权限组名称</button>
+					<button type='button' class='btn btn-default btn-sm mr10 '
+						th:if="${group.id!=1}"
+						th:onclick="'javascript:toEdit('+${group.id}+')' ">修改权限</button>
+					<button type='button' class='btn btn-default btn-sm mr10 '
+						th:if="${group.id!=1}">删除权限组</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
 
 	<div class="modal fade bs-example-modal-sm" id="addRuleGroup"
 		tabindex="-1" role="dialog" aria-labelledby="addRuleGroupLabel">
 		<div class="modal-dialog">
-			<div class="modal-content" >
+			<div class="modal-content">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button">
 						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
@@ -40,10 +56,9 @@
 				</div>
 				<div class="pd20">
 					<div class="input-group listSeaForm mt10 wb100">
-						<span class="input-group-btn"> 
-							<span class="btn">权限组名称：</span>
-						</span> 
-						<input class="form-control" type="text" value="" id="title" placeholder="请填写权限组名称">
+						<span class="input-group-btn"> <span class="btn">权限组名称：</span>
+						</span> <input class="form-control" type="text" value="" id="title"
+							placeholder="请填写权限组名称">
 					</div>
 				</div>
 				<div class="pd20">
@@ -52,33 +67,52 @@
 			</div>
 		</div>
 	</div>
-	
-	
-<script type="text/javascript">
 
-$('#addGroup').click(function() {
-	var title = $("#title").val();
-	var page="addGroups?title="+title;
-	$.ajax({
-           type:"post",
-           url: page,
-           data:{title:title},
-           contentType : "application/json;charset=UTF-8",
-           success: function(result){
-        	   location.reload(true);
-        	   alert("权限组 "+title+" 已添加");
-           },
-           error:function(result){
-        	   location.reload();
-        	   alert("操作出错啦！请联系管理人员");
-           },
-           fail:function(result){
-        	   location.reload();
-        	   alert("由于网络不顺畅等原因，无法执行本次操作");
-           }
-    }); 
-});
 
-</script>	
+	<script type="text/javascript">
+		$('#addGroup').click(function() {
+			var title = $("#title").val();
+			var page = "addGroups?title=" + title;
+			$.ajax({
+				type : "post",
+				url : page,
+				data : {
+					title : title
+				},
+				contentType : "application/json;charset=UTF-8",
+				success : function(result) {
+					alert("权限组 " + title + " 已添加");
+				},
+				error : function(result) {
+					alert("操作出错啦！请联系管理人员");
+				},
+				fail : function(result) {
+					alert("由于网络不顺畅等原因，无法执行本次操作");
+				}
+			});
+		});
+		function toEdit(id) {
+			var page = "toUpdateRules?id=" + id;
+			$
+					.ajax({
+						type : "post",
+						url : page,
+						data : {
+							id : id
+						},
+						contentType : "application/json;charset=UTF-8",
+						success : function(result) {
+							window.location.href = "http://localhost:8080/hospital/toUpdateRules?id="
+									+ id;
+						},
+						error : function(result) {
+							alert("操作出错啦！请联系管理人员");
+						},
+						fail : function(result) {
+							alert("由于网络不顺畅等原因，无法执行本次操作");
+						}
+					});
+		};
+	</script>
 </body>
 </html>

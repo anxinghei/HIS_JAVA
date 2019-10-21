@@ -37,6 +37,8 @@ public class DzmHisAuthGroupController {
 	
 	@RequestMapping("toGroups")
 	public String toIndex(Model model) {
+		List<DzmHisAuthGroup> groups=authGroupService.getAllGroups();
+		model.addAttribute("groups", groups);
 		return "rulesGroup/index";
 	}
 	
@@ -50,13 +52,6 @@ public class DzmHisAuthGroupController {
 		authGroup.setRules(",1");
 		authGroupService.addGroup(authGroup);
 		return "success";
-	}
-	
-	@RequestMapping("listGroups")
-	public String editRuleGroup(Model model) {
-		List<DzmHisAuthGroup> groups=authGroupService.getAllGroups();
-		model.addAttribute("groups", groups);
-		return "rulesGroup/listGroups";
 	}
 	
 	@RequestMapping("toUpdateRules")
