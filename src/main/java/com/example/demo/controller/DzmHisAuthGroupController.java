@@ -42,7 +42,7 @@ public class DzmHisAuthGroupController {
 		return "rulesGroup/index";
 	}
 	
-	@RequestMapping("addGroups")
+	@RequestMapping(value = "addGroups",method = RequestMethod.POST)
 	@ResponseBody
 	public String addGroups(Model model,@RequestParam("title")String title) {
 		DzmHisAuthGroup authGroup=new DzmHisAuthGroup();
@@ -52,6 +52,20 @@ public class DzmHisAuthGroupController {
 		authGroup.setRules(",1");
 		authGroupService.addGroup(authGroup);
 		return "success";
+	}
+	
+	@RequestMapping(value = "editGroupName/{authGroup_id}",method = RequestMethod.POST)
+	public String editGroupName(@PathVariable("authGroup_id") int authGroup_id,@RequestParam("title") String title) {
+		DzmHisAuthGroup authGroup=authGroupService.findById(authGroup_id);
+		authGroup.setTitle(title);
+		authGroupService.updateGroup(authGroup);
+		return "rulesGroup/index";
+	}
+	
+	@RequestMapping(value = "deleteGroup/{authGroup_id}",method = RequestMethod.POST)
+	public String deleteGroup(@PathVariable("authGroup_id") int authGroup_id) {
+		authGroupService.deleteGroup(authGroup_id);;
+		return "rulesGroup/index";
 	}
 	
 	@RequestMapping("toUpdateRules")

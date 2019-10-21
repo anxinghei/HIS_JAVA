@@ -18,6 +18,7 @@
 		<button type="button" class="btn btn-primary" data-toggle="modal"
 			data-target="#addRuleGroup">增加权限组</button>
 	</div>
+	<br />
 	<table
 		class="table-striped table-bordered table-hover  table-condensed">
 		<thead>
@@ -30,13 +31,14 @@
 				<td th:text="${groupStat.index+1}" width="20px" align="center"></td>
 				<td th:text="${group.title}" width="70px" align="center"></td>
 				<td>
-					<button type='button' class='btn btn-default btn-sm mr10 toNANBtn'
-						th:if="${group.id!=1}">修改权限组名称</button>
+					<button type="button" class="btn btn-default btn-sm mr10 toEditName" data-toggle="modal"
+						data-target="#editRuleGroup" th:if="${group.id!=1}" 
+						th:attr="data-id=${group.id}" >修改权限组名称</button>
 					<button type='button' class='btn btn-default btn-sm mr10 '
 						th:if="${group.id!=1}"
 						th:onclick="'javascript:toEdit('+${group.id}+')' ">修改权限</button>
 					<button type='button' class='btn btn-default btn-sm mr10 '
-						th:if="${group.id!=1}">删除权限组</button>
+						th:if="${group.id!=1}" th:onclick="'javascript:deleteGroup('+${group.id}+')' ">删除权限组</button>
 				</td>
 			</tr>
 		</tbody>
@@ -61,15 +63,66 @@
 							placeholder="请填写权限组名称">
 					</div>
 				</div>
-				<div class="pd20">
-					<button type="button" class="btn btn-primary wb100" id="addGroup">添加</button>
+				<div class="modal-footer">
+            		<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+            		<button type="button" class="btn btn-primary wb100" id="addGroup">添加</button>
+         		</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade bs-example-modal-sm" id="editRuleGroup"
+		tabindex="-1" role="dialog" aria-labelledby="editRuleGroupLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">修改权限组名称</h4>
 				</div>
+				<div class="pd20">
+					<div class="input-group listSeaForm mt10 wb100">
+						<span class="input-group-btn"> <span class="btn">权限组名称：</span>
+						</span> <input class="form-control" type="text" value="" id="titleEdit"
+							placeholder="请填写权限组名称">
+					</div>
+				</div>
+				<div class="modal-footer">
+            		<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+            		<button type="button" class="btn btn-primary wb100" id="editGroup">修改</button>
+         		</div>
 			</div>
 		</div>
 	</div>
 
 
 	<script type="text/javascript">
+		$('.toEditName').click(function() {
+			var authGroup_id =  $(this).attr('data-id');	
+			$('#editGroup').click(function() {
+				var title = $("#titleEdit").val();
+				var page = "editGroupName/"+authGroup_id+"?title=" + title;
+				$.ajax({
+					type : "post",
+					url : page,
+					data : {
+						authGroup_id : authGroup_id,
+						title : title
+					},
+					contentType : "application/json;charset=UTF-8",
+					success : function(result) {
+						location.reload();
+						alert("权限组名称已修改");
+					},
+					error : function(result) {
+						alert("操作出错啦！请联系管理人员");
+					},
+					fail : function(result) {
+						alert("由于网络不顺畅等原因，无法执行本次操作");
+					}
+				});
+			});
+		});
 		$('#addGroup').click(function() {
 			var title = $("#title").val();
 			var page = "addGroups?title=" + title;
@@ -81,6 +134,7 @@
 				},
 				contentType : "application/json;charset=UTF-8",
 				success : function(result) {
+					location.reload();
 					alert("权限组 " + title + " 已添加");
 				},
 				error : function(result) {
@@ -91,10 +145,33 @@
 				}
 			});
 		});
+		function deleteGroup(authGroup_id) {
+			var confirmDelete = confirm("确认要删除");
+            if(confirmDelete){
+            	var page = "deleteGroup/" + authGroup_id;
+    			$.ajax({
+    						type : "post",
+    						url : page,
+    						data : {
+    							authGroup_id : authGroup_id
+    						},
+    						contentType : "application/json;charset=UTF-8",
+    						success : function(result) {
+    							location.reload();
+    							alert("权限组已删除");
+    						},
+    						error : function(result) {
+    							alert("操作出错啦！请联系管理人员");
+    						},
+    						fail : function(result) {
+    							alert("由于网络不顺畅等原因，无法执行本次操作");
+    						}
+    					});
+            }
+		};
 		function toEdit(id) {
 			var page = "toUpdateRules?id=" + id;
-			$
-					.ajax({
+			$.ajax({
 						type : "post",
 						url : page,
 						data : {

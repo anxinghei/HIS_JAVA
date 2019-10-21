@@ -69,12 +69,21 @@
 	location.reload(true);  
 	// 默认为 false，从客户端缓存里取当前页。true, 则以 GET 方式，从服务端取最新的页面, 相当于客户端点击 F5("刷新") 
  
-4、  
+4、
   
 ## Thymeleaf 补充  
   
 1、link/>  
 	link type="text/css" href="css/bootstrap.min.css"  rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>  
+  
+2、自定义属性：  
+th:attr="data-id=${group.id}"  
+获取该属性值：  
+var authGroup_id =  $(this).attr('data-id');   
+  
+3、点击事件：  
+th:onclick="'javascript:deleteGroup('+${group.id}+')' "    
+
   
 ## bootStrap初体验  
   

@@ -38,4 +38,7 @@ public class DzmHisAuthGroupService {
 	public void addGroup(DzmHisAuthGroup authGroup) {
 		authGroupMapper.insert(authGroup);
 	}
+	public void deleteGroup(int id) {
+		authGroupMapper.deleteByPrimaryKey(id);
+	}
 }
