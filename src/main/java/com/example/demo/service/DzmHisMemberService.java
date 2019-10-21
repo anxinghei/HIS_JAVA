@@ -1,9 +1,14 @@
 package com.example.demo.service;
 
+import java.sql.ResultSet;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.mapper.DzmHisMemberMapper;
+import com.example.demo.pojo.DzmHisMember;
+import com.example.demo.vo.member_doctorVO;
 import com.example.demo.pojo.DzmHisMember;
 
 /**
@@ -31,4 +36,24 @@ public class DzmHisMemberService  {
 		return memberMapper.selectOne(record);
 	}
 
+	public DzmHisMember findById(int id) {
+		return memberMapper.selectByPrimaryKey(id);
+	}
+	
+	public List<DzmHisMember> getAllMembers(){
+		return memberMapper.selectAll();
+	}
+	
+	public void updateGroup(DzmHisMember member) {
+		memberMapper.updateByPrimaryKeySelective(member);
+	}
+	public void addGroup(DzmHisMember member) {
+		memberMapper.insert(member);
+	}
+	public void deleteGroup(int id) {
+		memberMapper.deleteByPrimaryKey(id);
+	}
+	public List<member_doctorVO> getVOs() {
+		return memberMapper.getVO();
+	}
 }

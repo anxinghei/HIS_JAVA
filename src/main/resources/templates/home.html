@@ -23,7 +23,9 @@
 		</div>
 	</div><br/><br/>
 
-	
+	<div shiro:hasPermission="member:index">
+		<a href="toMembers">用户管理</a><br />
+	</div>
 	<div shiro:hasPermission="AuthGroup:index">
 		<a href="toGroups">权限组修改</a><br />
 	</div>

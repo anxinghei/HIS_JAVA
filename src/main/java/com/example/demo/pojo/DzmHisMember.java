@@ -43,14 +43,7 @@ public class DzmHisMember implements Serializable {
 	    //1,管理员，2，医生，3.护士，4，挂号员，5，收费员6，发药员，7，财务8，其他人员
     @Column(name = "type")
     private Integer type;
-	
-	    //科室id
-    @Column(name = "department_id")
-    private Integer departmentId;
-	
-	    //医生级别 0:其他  1:主治医师  2:副主任医师  3:主任医师  4:医士  5:医师  6:助理医师  7:实习医师  8:主管护师  9:护师  10:护士  11:医师助理  12:研究生  13:随访员 
-    @Column(name = "rank")
-    private Integer rank;
+
 	
 	    //修改时间
     @Column(name = "update_time")
@@ -141,30 +134,8 @@ public class DzmHisMember implements Serializable {
 	public Integer getType() {
 		return type;
 	}
-	/**
-	 * 设置：科室id
-	 */
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
-	/**
-	 * 获取：科室id
-	 */
-	public Integer getDepartmentId() {
-		return departmentId;
-	}
-	/**
-	 * 设置：医生级别 0:其他  1:主治医师  2:副主任医师  3:主任医师  4:医士  5:医师  6:助理医师  7:实习医师  8:主管护师  9:护师  10:护士  11:医师助理  12:研究生  13:随访员 
-	 */
-	public void setRank(Integer rank) {
-		this.rank = rank;
-	}
-	/**
-	 * 获取：医生级别 0:其他  1:主治医师  2:副主任医师  3:主任医师  4:医士  5:医师  6:助理医师  7:实习医师  8:主管护师  9:护师  10:护士  11:医师助理  12:研究生  13:随访员 
-	 */
-	public Integer getRank() {
-		return rank;
-	}
+
+
 	/**
 	 * 设置：修改时间
 	 */
@@ -177,9 +148,5 @@ public class DzmHisMember implements Serializable {
 	public Integer getUpdateTime() {
 		return updateTime;
 	}
-	@Override
-	public String toString() {
-		return "DzmHisMember [uid=" + uid + ", userName=" + userName + ", password=" + password + ", status=" + status
-				+ ", pId=" + pId + ", type=" + type + ", departmentId=" + departmentId + ", rank=" + rank + "]";
-	}
+
 }

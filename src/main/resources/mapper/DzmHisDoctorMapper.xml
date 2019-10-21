@@ -4,21 +4,24 @@
 <mapper namespace="com.example.demo.mapper.DzmHisDoctorMapper">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.example.demo.pojo.DzmHisDoctor" id="dzmHisDoctorMap">
-        <result property="id" column="id"/>
-        <result property="trueName" column="true_name"/>
-        <result property="age" column="age"/>
-        <result property="picture" column="picture"/>
-        <result property="sex" column="sex"/>
-        <result property="background" column="background"/>
-        <result property="phone" column="phone"/>
-        <result property="mailbox" column="mailbox"/>
-        <result property="strong" column="strong"/>
-        <result property="honor" column="honor"/>
-        <result property="introduction" column="introduction"/>
-        <result property="createTime" column="create_time"/>
-        <result property="updateTime" column="update_time"/>
-        <result property="uid" column="uid"/>
-    </resultMap>
+	<resultMap type="com.example.demo.pojo.DzmHisDoctor"
+		id="dzmHisDoctorMap">
+		<result property="id" column="id" />
+		<result property="trueName" column="true_name" />
+		<result property="age" column="age" />
+		<result property="picture" column="picture" />
+		<result property="sex" column="sex" />
+		<result property="background" column="background" />
+		<result property="phone" column="phone" />
+		<result property="mailbox" column="mailbox" />
+		<result property="strong" column="strong" />
+		<result property="honor" column="honor" />
+		<result property="introduction" column="introduction" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="uid" column="uid" />
+		<result property="departmentId" column="department_id" />
+		<result property="rank" column="rank" />
+	</resultMap>
 
 </mapper>
