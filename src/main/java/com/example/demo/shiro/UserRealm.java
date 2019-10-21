@@ -109,6 +109,9 @@ public class UserRealm extends AuthorizingRealm{
 			//用户名不存在
 			return null;//shiro底层会抛出UnKnowAccountException
 		}
+		if (member.getStatus()==2) {
+			return null;
+		}
 		
 		//2.判断密码
 		return new SimpleAuthenticationInfo(member,member.getPassword(),"");

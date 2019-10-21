@@ -78,7 +78,6 @@ public class loginController {
             return "login";
         }
 		try {
-			System.out.println(rememberMe);
 			token.setRememberMe(rememberMe);
 			subject.login(token);
 			//登录成功，跳转到主页面
