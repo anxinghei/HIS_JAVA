@@ -79,6 +79,22 @@ public class DzmHisDoctor implements Serializable {
 	// 11:医师助理 12:研究生 13:随访员
 	@Column(name = "rank")
 	private Integer rank;
+	
+
+	public DzmHisDoctor(String trueName, Integer age, Integer sex, 
+			String phone,Integer createTime,
+			Integer updateTime, Integer uid, Integer departmentId, Integer rank) {
+		super();
+		this.trueName = trueName;
+		this.age = age;
+		this.sex = sex;
+		this.phone = phone;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.uid = uid;
+		this.departmentId = departmentId;
+		this.rank = rank;
+	}
 
 	/**
 	 * 设置：医生级别 0:其他 1:主治医师 2:副主任医师 3:主任医师 4:医士 5:医师 6:助理医师 7:实习医师 8:主管护师 9:护师 10:护士

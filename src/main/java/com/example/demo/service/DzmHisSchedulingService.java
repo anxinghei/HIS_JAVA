@@ -1,16 +1,18 @@
 package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
-import com.example.demo.mapper.DzmHisDoctorMapper;
+
+
+import com.example.demo.mapper.DzmHisSchedulingMapper;
 
 
 /**
- * 医生基本信息表
+ * 我的排班
  *
  * @author Autumn
  * @email 
  * @date 2019-10-08 16:57:43
  */
 @Service
-public class DzmHisDoctorBiz  {
+public class DzmHisSchedulingService  {
 }

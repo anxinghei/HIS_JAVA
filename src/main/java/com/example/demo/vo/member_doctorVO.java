@@ -10,7 +10,7 @@ public class member_doctorVO {
 	private String phone;
 	private Integer createTime;
 	// DzmHisMember
-	private Integer departmentId;
+	private String departmentName;
 	// DzmHisAuthGroup
 	private String title;
 	public Integer getDid() {
@@ -49,22 +49,19 @@ public class member_doctorVO {
 	public void setCreateTime(Integer createTime) {
 		this.createTime = createTime;
 	}
-	public Integer getDepartmentId() {
-		return departmentId;
-	}
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
+
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	@Override
-	public String toString() {
-		return "member_doctorVO [did=" + did + ", trueName=" + trueName + ", sex=" + sex + ", age=" + age + ", phone="
-				+ phone + ", createTime=" + createTime + ", departmentId=" + departmentId + ", title=" + title + "]";
+	public String getDepartmentName() {
+		return departmentName;
 	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
 	
 }

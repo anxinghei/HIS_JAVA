@@ -44,13 +44,13 @@ public class DzmHisMemberService  {
 		return memberMapper.selectAll();
 	}
 	
-	public void updateGroup(DzmHisMember member) {
+	public void updateMember(DzmHisMember member) {
 		memberMapper.updateByPrimaryKeySelective(member);
 	}
-	public void addGroup(DzmHisMember member) {
+	public void addMember(DzmHisMember member) {
 		memberMapper.insert(member);
 	}
-	public void deleteGroup(int id) {
+	public void deleteMember(int id) {
 		memberMapper.deleteByPrimaryKey(id);
 	}
 	public List<member_doctorVO> getVOs() {

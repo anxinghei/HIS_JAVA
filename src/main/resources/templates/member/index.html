@@ -9,26 +9,28 @@
 	th:href="@{/css/bootstrap.min.css}" />
 <script type="text/javascript" src="../../js/bootstrap.min.js"
 	th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="../../js/checkForm.js"
+	th:src="@{/js/checkForm.js}"></script>
 </head>
 <body>
 
 	<a href="toHome">返回</a>
 	<br />
 	<br />
-	<div >
+	<div>
 		<button type="button" class="btn btn-primary" data-toggle="modal"
-			data-target="#addVo">增加用户</button>
+			data-target="#toAddVo">增加用户</button>
 	</div>
 	<br />
 	<table
 		class="table-striped table-bordered table-hover  table-condensed">
 		<thead>
 			<th wdidth="30px" style="text-align: center;" hidden="true">did</th>
-			<th wdidth="30px" style="text-align: center;">id</th>
-			<th wdidth="70px" style="text-align: center;">用户名</th>
+			<th wdidth="50px" style="text-align: center;">id</th>
+			<th wdidth="70px" style="text-align: center;">姓名</th>
 			<th wdidth="70px" style="text-align: center;">科室</th>
 			<th wdidth="70px" style="text-align: center;">职位</th>
-			<th wdidth="70px" style="text-align: center;">联系方式</th>
+			<th wdidth="70px" style="text-align: center;">手机</th>
 			<th wdidth="70px" style="text-align: center;">性别</th>
 			<th wdidth="70px" style="text-align: center;">年龄</th>
 			<th wdidth="70px" style="text-align: center;">创建时间</th>
@@ -37,30 +39,32 @@
 		<tbody>
 			<tr th:each="vo : ${vos}">
 				<td th:text="${vo.did}" wdidth="20px" align="center" hidden="true"></td>
-				<td th:text="${voStat.index+1}" wdidth="20px" align="center"></td>
+				<td th:text="${voStat.index+1}" wdidth="50px" align="center"></td>
 				<td th:text="${vo.trueName}" wdidth="70px" align="center"></td>
-				<td th:text="${vo.departmentId}" wdidth="70px" align="center"></td>
+				<td th:text="${vo.departmentName}" wdidth="70px" align="center"></td>
 				<td th:text="${vo.title}" wdidth="70px" align="center"></td>
 				<td th:text="${vo.phone}" wdidth="70px" align="center"></td>
-				<td th:text="${vo.sex}" wdidth="70px" align="center"></td>
+				<td th:text="${vo.sex}==1?'男':'女'" wdidth="70px" align="center"></td>
 				<td th:text="${vo.age}" wdidth="70px" align="center"></td>
 				<td th:text="${vo.createTime}" wdidth="70px" align="center"></td>
 				<td>
-					<button type="button" class="btn btn-default btn-sm mr10 toEditName" data-toggle="modal"
-						data-target="#editVo" th:if="${vo.did!=1}" 
-						th:attr="data-id=${vo.did}" >修改权限组名称</button>
+					<button type="button"
+						class="btn btn-default btn-sm mr10 toEditName" data-toggle="modal"
+						data-target="#editVo" th:if="${vo.did!=1}"
+						th:attr="data-id=${vo.did}">用户修改</button>
 					<button type='button' class='btn btn-default btn-sm mr10 '
 						th:if="${vo.did!=1}"
-						th:onclick="'javascript:toEdit('+${vo.did}+')' ">修改权限</button>
+						th:onclick="'javascript:toEdit('+${vo.did}+')' ">停用用户</button>
 					<button type='button' class='btn btn-default btn-sm mr10 '
-						th:if="${vo.did!=1}" th:onclick="'javascript:deleteVo('+${vo.did}+')' ">删除权限组</button>
+						th:if="${vo.did!=1}"
+						th:onclick="'javascript:deleteVo('+${vo.did}+')' ">删除用户</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 
-<div class="modal fade bs-example-modal-sm" id="addVo"
-		tabindex="-1" role="dialog" aria-labelledby="addVoLabel">
+	<div class="modal fade bs-example-modal-sm" id="toAddVo" tabindex="-1"
+		role="dialog" aria-labelledby="toAddVoLabel">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -68,63 +72,64 @@
 						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
 					</button>
 					<h4 class="modal-title">增加用户</h4>
-				</div>
+				</div><br />
 				<div class="pd20">
 					<div class="input-group listSeaForm mt10 wb100">
-						<span class="input-group-btn"> <span class="btn">用户名称：</span>
+						<span class="input-group-btn"> <span class="btn">姓名：</span>
 						</span> <input class="form-control" type="text" value="" id="trueName"
 							placeholder="请填写用户名称">
 					</div>
-				</div>
+				</div><br />
+				<div class="input-group listSeaForm mt10 wb100">
+					<span class="input-group-btn"> <span class="btn">  科室：</span>
+					</span> <select class="form-control" id="department_id">
+						<option value="0">请选择科室</option>
+						<option th:each="department : ${departments}" th:value="${department.did}" th:text="${department.departmentName}"></option>
+					</select>
+				</div><br />
+				<div class="input-group listSeaForm mt10 wb100">
+					<span class="input-group-btn"> <span class="btn">  职位：</span>
+					</span> <select class="form-control" id="title">
+						<option value="0">请选择职位</option>
+						<option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.title}"></option>
+					</select>
+				</div><br />
 				<div class="pd20">
 					<div class="input-group listSeaForm mt10 wb100">
-						<span class="input-group-btn"> <span class="btn">科室：</span>
-						</span> <input class="form-control" type="text" value="" id="departmentId"
-							placeholder="请填写用户名称">
-					</div>
-				</div>
-				<div class="pd20">
-					<div class="input-group listSeaForm mt10 wb100">
-						<span class="input-group-btn"> <span class="btn">职位：</span>
-						</span> <input class="form-control" type="text" value="" id="title"
-							placeholder="请填写用户名称">
-					</div>
-				</div>
-				<div class="pd20">
-					<div class="input-group listSeaForm mt10 wb100">
-						<span class="input-group-btn"> <span class="btn">联系方式：</span>
-						</span> <input class="form-control" type="text" value="" id="phone"
+						<span class="input-group-btn"> <span class="btn">手机：</span>
+						</span> <input class="form-control" type="number" value="" id="phone"
 							placeholder="请填写联系方式">
 					</div>
-				</div>
+				</div><br />
+				<div class="input-group listSeaForm mt10 wb100">
+					<span class="input-group-btn"> <span class="btn">  性别：</span>
+					</span> <select class="form-control" id="sex">
+						<option value="0">请选择性别</option>
+						<option value="2">女</option>
+						<option value="1">男</option>
+					</select>
+				</div><br />
 				<div class="pd20">
 					<div class="input-group listSeaForm mt10 wb100">
-						<span class="input-group-btn"> <span class="btn">性别：</span>
-						</span> <input class="form-control" type="text" value="" id="sex"
-							placeholder="请填写用户名称">
+						<span class="input-group-btn"> <span class="btn">  年龄：</span>
+						</span> <input class="form-control" type="number" id="age" min="0"
+							max="150" placeholder="请填写用户年龄">
 					</div>
-				</div>
-				<div class="pd20">
-					<div class="input-group listSeaForm mt10 wb100">
-						<span class="input-group-btn"> <span class="btn">年龄：</span>
-						</span> <input class="form-control" type="text" value="" id="age"
-							placeholder="请填写用户年龄">
-					</div>
-				</div>
+				</div><br />
 				<div class="modal-footer">
-            		<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
-            		<button type="button" class="btn btn-primary wb100" id="addGroup">添加</button>
-         		</div>
+					<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+					<button type="button" class="btn btn-primary wb100" id="addVo">添加</button>
+				</div>
 			</div>
 		</div>
 	</div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		$('.toEditName').click(function() {
-			var authGroup_id =  $(this).attr('data-id');	
+			var authGroup_id = $(this).attr('data-id');
 			$('#editGroup').click(function() {
 				var title = $("#titleEdit").val();
-				var page = "editGroupName/"+authGroup_id+"?title=" + title;
+				var page = "editGroupName/" + authGroup_id + "?title=" + title;
 				$.ajax({
 					type : "post",
 					url : page,
@@ -146,19 +151,58 @@
 				});
 			});
 		});
-		$('#addGroup').click(function() {
+		$('#addVo').click(function() {
+			var trueName = $("#trueName").val();
+			 if(trueName.length==0 || trueName.length>6){
+				 alert('姓名不能为空,并且不能多于6位');
+                 return false;
+             }
+             if(!isChinese(trueName)){
+            	 alert('姓名必须为中文');
+                 return false;
+             }
+			var department_id = $("#department_id").val();
+			if(department_id==0){
+				alert('请选择科室');
+                return false;
+            }
 			var title = $("#title").val();
-			var page = "addGroups?title=" + title;
+			if(title==0){
+				alert('请选择职位');
+                return false;
+            }
+			var phone = $("#phone").val();
+			if(!isMobile(phone)){
+				alert('手机格式不正确');
+                return false;
+            }
+			var sex = $("#sex").val();
+			if(sex==0){
+				alert('请选择性别');
+                return false;
+            }
+			var age = $("#age").val();
+			if(!isInteger(age) || age>150 ||age<0){
+				alert('请填写正确的年龄');
+                return false;
+			}
+			var page = "addMember?trueName=" +trueName+"&department_id="+department_id+"&title="+title+
+					"&phone="+phone+"&sex="+sex+"&age="+age;
 			$.ajax({
 				type : "post",
 				url : page,
 				data : {
-					title : title
+					trueName : trueName,
+					department_id : department_id,
+					title : title,
+					phone : phone,
+					sex : sex,
+					age : age
 				},
 				contentType : "application/json;charset=UTF-8",
 				success : function(result) {
+					alert("用户 " + trueName + " 已添加");
 					location.reload();
-					alert("权限组 " + title + " 已添加");
 				},
 				error : function(result) {
 					alert("操作出错啦！请联系管理人员");
@@ -170,31 +214,32 @@
 		});
 		function deleteGroup(authGroup_id) {
 			var confirmDelete = confirm("确认要删除");
-            if(confirmDelete){
-            	var page = "deleteGroup/" + authGroup_id;
-    			$.ajax({
-    						type : "post",
-    						url : page,
-    						data : {
-    							authGroup_id : authGroup_id
-    						},
-    						contentType : "application/json;charset=UTF-8",
-    						success : function(result) {
-    							location.reload();
-    							alert("权限组已删除");
-    						},
-    						error : function(result) {
-    							alert("操作出错啦！请联系管理人员");
-    						},
-    						fail : function(result) {
-    							alert("由于网络不顺畅等原因，无法执行本次操作");
-    						}
-    					});
-            }
+			if (confirmDelete) {
+				var page = "deleteGroup/" + authGroup_id;
+				$.ajax({
+					type : "post",
+					url : page,
+					data : {
+						authGroup_id : authGroup_id
+					},
+					contentType : "application/json;charset=UTF-8",
+					success : function(result) {
+						location.reload();
+						alert("权限组已删除");
+					},
+					error : function(result) {
+						alert("操作出错啦！请联系管理人员");
+					},
+					fail : function(result) {
+						alert("由于网络不顺畅等原因，无法执行本次操作");
+					}
+				});
+			}
 		};
 		function toEdit(id) {
 			var page = "toUpdateRules?id=" + id;
-			$.ajax({
+			$
+					.ajax({
 						type : "post",
 						url : page,
 						data : {
