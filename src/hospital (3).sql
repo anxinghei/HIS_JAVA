@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2019 �?10 �?21 �?08:10
+-- 生成日期: 2019 �?10 �?22 �?02:35
 -- 服务器版本: 5.5.53
 -- PHP 版本: 5.6.27
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `dzm_his_auth_group` (
   `is_manage` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1需要验证权限 2 不需要验证权限.',
   `rules` text NOT NULL COMMENT '用户组拥有的规则id， 多个规则',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COMMENT='用户组表' AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COMMENT='用户组表' AUTO_INCREMENT=21 ;
 
 --
 -- 转存表中的数据 `dzm_his_auth_group`
@@ -565,25 +565,30 @@ CREATE TABLE IF NOT EXISTS `dzm_his_doctor` (
   `age` int(3) DEFAULT '0' COMMENT '年龄',
   `picture` varchar(255) DEFAULT '' COMMENT '头像',
   `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '性别 0,空1:男  2:女',
-  `background` tinyint(1) NOT NULL DEFAULT '0' COMMENT '学历 1：专科  2：本科  3：研究生  4：博士  5：博士后',
+  `background` tinyint(1) DEFAULT NULL COMMENT '学历 1：专科  2：本科  3：研究生  4：博士  5：博士后',
   `phone` varchar(11) NOT NULL DEFAULT '0' COMMENT '手机号',
-  `mailbox` varchar(50) NOT NULL DEFAULT '' COMMENT '邮箱',
-  `strong` varchar(255) NOT NULL DEFAULT '' COMMENT '擅长',
-  `honor` varchar(255) NOT NULL DEFAULT '' COMMENT '荣誉',
-  `introduction` text NOT NULL COMMENT '简介',
+  `mailbox` varchar(50) DEFAULT NULL COMMENT '邮箱',
+  `strong` varchar(255) DEFAULT NULL COMMENT '擅长',
+  `honor` varchar(255) DEFAULT NULL COMMENT '荣誉',
+  `introduction` text COMMENT '简介',
   `create_time` int(10) NOT NULL COMMENT '注册时间',
   `update_time` int(10) NOT NULL COMMENT '修改时间',
   `uid` int(11) NOT NULL COMMENT '用户表userid',
+  `department_id` int(2) NOT NULL COMMENT '科室id',
+  `rank` tinyint(2) NOT NULL DEFAULT '0' COMMENT '医生级别 0:其他  1:主治医师  2:副主任医师  3:主任医师  4:医士  5:医师  6:助理医师  7:实习医师  8:主管护师  9:护师  10:护士  11:医师助理  12:研究生  13:随访员 ',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='医生基本信息表' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='医生基本信息表' AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `dzm_his_doctor`
 --
 
-INSERT INTO `dzm_his_doctor` (`id`, `true_name`, `age`, `picture`, `sex`, `background`, `phone`, `mailbox`, `strong`, `honor`, `introduction`, `create_time`, `update_time`, `uid`) VALUES
-(1, 'root', 0, '', 0, 0, '0', '', '', '', '', 0, 0, 1);
+INSERT INTO `dzm_his_doctor` (`id`, `true_name`, `age`, `picture`, `sex`, `background`, `phone`, `mailbox`, `strong`, `honor`, `introduction`, `create_time`, `update_time`, `uid`, `department_id`, `rank`) VALUES
+(1, '郑工', 50, '', 0, 0, '13924436106', '', '', '', '', 0, 0, 1, 10, 1),
+(2, '扎根', 35, NULL, 2, NULL, '13241156389', NULL, NULL, NULL, NULL, 20191022, 20191022, 4, 15, 0),
+(3, '测试', 24, NULL, 1, NULL, '13245672393', NULL, NULL, NULL, NULL, 20191022, 20191022, 5, 16, 0),
+(4, '都是', 44, NULL, 1, NULL, '13452278903', NULL, NULL, NULL, NULL, 20191022, 20191022, 6, 12, 0);
 
 -- --------------------------------------------------------
 
@@ -742,23 +747,23 @@ CREATE TABLE IF NOT EXISTS `dzm_his_member` (
   `status` tinyint(1) DEFAULT '1' COMMENT '是否允许用户登录( 1 是  2否) 3 删除',
   `p_id` int(11) DEFAULT '1' COMMENT '医院id，用于区分用户类型及其医生所属诊所',
   `type` tinyint(2) DEFAULT '8' COMMENT '1,管理员，2，医生，3.护士，4，挂号员，5，收费员6，发药员，7，财务8，其他人员',
-  `department_id` int(11) DEFAULT '1' COMMENT '科室id',
-  `rank` tinyint(2) DEFAULT '0' COMMENT '医生级别 0:其他  1:主治医师  2:副主任医师  3:主任医师  4:医士  5:医师  6:助理医师  7:实习医师  8:主管护师  9:护师  10:护士  11:医师助理  12:研究生  13:随访员 ',
   `update_time` int(10) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`uid`),
   KEY `user_name` (`user_name`) USING BTREE,
   KEY `status` (`status`) USING BTREE,
   KEY `p_id` (`p_id`) USING BTREE,
-  KEY `type` (`type`) USING BTREE,
-  KEY `department_id` (`department_id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='HIS用户表' AUTO_INCREMENT=2 ;
+  KEY `type` (`type`) USING BTREE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='HIS用户表' AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `dzm_his_member`
 --
 
-INSERT INTO `dzm_his_member` (`uid`, `user_name`, `password`, `create_time`, `status`, `p_id`, `type`, `department_id`, `rank`, `update_time`) VALUES
-(1, 'root', 'root', 1, 1, 1, 2, 1, 1, 1);
+INSERT INTO `dzm_his_member` (`uid`, `user_name`, `password`, `create_time`, `status`, `p_id`, `type`, `update_time`) VALUES
+(1, 'root', 'root', 1, 1, 1, 2, 1),
+(4, '13241156389', '13241156389', 20191022, 1, 1, 2, 20191022),
+(5, '13245672393', '13245672393', 20191022, 1, 1, 3, 20191022),
+(6, '13452278903', '13452278903', 20191022, 1, 1, 5, 20191022);
 
 -- --------------------------------------------------------
 

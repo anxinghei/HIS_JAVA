@@ -16,6 +16,6 @@
     </resultMap>
     
 	<select id="getVO" resultType="com.example.demo.vo.member_doctorVO">
-		SELECT d.true_name as trueName,d.sex,d.age,d.create_time as createTime,g.title,dt.department_name as departmentName,d.phone,d.id as did FROM `dzm_his_auth_group` g join `dzm_his_member` m join `dzm_his_doctor` d join `dzm_his_department` dt on m.type=g.id and d.uid=m.uid and d.department_id=dt.did
+		SELECT d.true_name as trueName,d.sex,d.age,d.create_time as createTime,g.title,dt.department_name as departmentName,d.phone,d.id as did,m.status FROM `dzm_his_auth_group` g join `dzm_his_member` m join `dzm_his_doctor` d join `dzm_his_department` dt on m.type=g.id and d.uid=m.uid and d.department_id=dt.did
 	</select>
 </mapper>

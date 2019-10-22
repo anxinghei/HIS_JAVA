@@ -22,4 +22,12 @@ public class DzmHisDoctorService  {
 	public void addDoctor(DzmHisDoctor record) {
 		doctorMapper.insert(record);
 	}
+	
+	public void deleteDoctor(int id) {
+		doctorMapper.deleteByPrimaryKey(id);
+	}
+	
+	public DzmHisDoctor findById(int id) {
+		return doctorMapper.selectByPrimaryKey(id);
+	}
 }

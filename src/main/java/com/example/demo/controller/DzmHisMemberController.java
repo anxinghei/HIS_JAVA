@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,4 +59,32 @@ public class DzmHisMemberController  {
 		doctorService.addDoctor(doctor);
 		return "member/index";
 	}
+	
+	@RequestMapping(value = "deleteMember/{did}",method = RequestMethod.POST)
+	public String deleteMember(@PathVariable("did") int did) {
+		DzmHisDoctor doctor=doctorService.findById(did);
+		System.out.println(doctor.getTrueName());
+		doctorService.deleteDoctor(did);
+		memberService.deleteMember(doctor.getUid());
+		return "member/index";
+	}
+	
+	@RequestMapping(value = "editY/{did}",method = RequestMethod.POST)
+	public String editY(@PathVariable("did") int did) {
+		DzmHisDoctor doctor=doctorService.findById(did);
+		DzmHisMember member=memberService.findById(doctor.getUid());
+		member.setStatus(1);
+		memberService.updateMember(member);
+		return "member/index";
+	}
+	
+	@RequestMapping(value = "editN/{did}",method = RequestMethod.POST)
+	public String editN(@PathVariable("did") int did) {
+		DzmHisDoctor doctor=doctorService.findById(did);
+		DzmHisMember member=memberService.findById(doctor.getUid());
+		member.setStatus(2);
+		memberService.updateMember(member);
+		return "member/index";
+	}
+	
 }

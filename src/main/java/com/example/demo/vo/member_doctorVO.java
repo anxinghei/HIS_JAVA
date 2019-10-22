@@ -11,8 +11,17 @@ public class member_doctorVO {
 	private Integer createTime;
 	// DzmHisMember
 	private String departmentName;
+	private int status;
 	// DzmHisAuthGroup
 	private String title;
+	
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public Integer getDid() {
 		return did;
 	}

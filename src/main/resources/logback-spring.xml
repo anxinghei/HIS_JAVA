@@ -44,9 +44,9 @@
 			<!--定义了日志的切分方式——把每一天的日志归档到一个文件中 -->
             <fileNamePattern>${log.path}/springboot-logging.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志保存周期:只保留最近30天的日志 -->
-            <maxHistory>30</maxHistory>
+            <maxHistory>7</maxHistory>
             <!-- 总大小 -->
-            <totalSizeCap>50MB</totalSizeCap>
+            <totalSizeCap>30MB</totalSizeCap>
         </rollingPolicy>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>

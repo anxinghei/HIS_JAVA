@@ -1,7 +1,6 @@
 package com.example.demo.mapper;
 
 import com.example.demo.pojo.DzmHisDoctor;
-
 import tk.mybatis.mapper.common.Mapper;
 
 /**
@@ -9,9 +8,9 @@ import tk.mybatis.mapper.common.Mapper;
  * 
  * @author Autumn
  * @email 
- * @date 2019-10-08 16:57:43
+ * @date 2019-10-22 16:25:35
  */
-
+//@Mapper
 public interface DzmHisDoctorMapper extends Mapper<DzmHisDoctor> {
 	
 }

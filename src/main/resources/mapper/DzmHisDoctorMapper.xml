@@ -7,12 +7,12 @@
 	<resultMap type="com.example.demo.pojo.DzmHisDoctor"
 		id="dzmHisDoctorMap">
 		<result property="id" column="id" />
-		<result property="trueName" column="true_name" />
+		<result property="trueName" column="true_name" jdbcType="VARCHAR"/>
 		<result property="age" column="age" />
 		<result property="picture" column="picture" />
 		<result property="sex" column="sex" />
 		<result property="background" column="background" />
-		<result property="phone" column="phone" />
+		<result property="phone" column="phone" jdbcType="VARCHAR"/>
 		<result property="mailbox" column="mailbox" />
 		<result property="strong" column="strong" />
 		<result property="honor" column="honor" />
