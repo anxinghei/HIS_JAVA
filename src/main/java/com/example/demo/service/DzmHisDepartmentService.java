@@ -25,4 +25,20 @@ public class DzmHisDepartmentService  {
 	public List<DzmHisDepartment> getAllDepartments() {
 		return departmentMapper.selectAll();
 	}
+	
+	public void addDept(DzmHisDepartment record) {
+		departmentMapper.insert(record);
+	}
+	
+	public void deleteDept(int did) {
+		departmentMapper.deleteByPrimaryKey(did);
+	}
+	
+	public void editDept(DzmHisDepartment record) {
+		departmentMapper.updateByPrimaryKeySelective(record);
+	}
+	
+	public DzmHisDepartment getDept(int did) {
+		return departmentMapper.selectByPrimaryKey(did);
+	}
 }

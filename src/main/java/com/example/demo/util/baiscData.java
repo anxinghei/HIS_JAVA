@@ -1,5 +1,8 @@
 package com.example.demo.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class baiscData {
 	
 // 判断数字是否在数字数字内
@@ -25,5 +28,10 @@ public class baiscData {
 			rulesInt[i]=Integer.parseInt(ruleStrings[i]);
 		}
 		return rulesInt;
+	}
+// 获取当前时间
+	public static int getCurrentTime() {
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd" );	    
+	    return Integer.valueOf(ft.format(new Date()));
 	}
 }
