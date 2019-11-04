@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.pojo.DzmHisPatientFile;
@@ -15,4 +16,13 @@ import com.example.demo.mapper.DzmHisPatientFileMapper;
  */
 @Service
 public class DzmHisPatientFileService  {
+	
+	@Autowired
+	private DzmHisPatientFileMapper patientFileMapper;
+	
+	public DzmHisPatientFile getFileByPatientId(int id) {
+		DzmHisPatientFile record=new DzmHisPatientFile();
+		record.setPatientId(id);
+		return patientFileMapper.selectOne(record);
+	}
 }

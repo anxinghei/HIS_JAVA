@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>患者库管理</title>
+<script type="text/javascript" src="../../js/jquery.min.js"
+	th:src="@{/js/jquery.min.js}"></script>
+<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.min.css}" />
+<script type="text/javascript" src="../../js/bootstrap.min.js"
+	th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<br />
+	<a href="toHome">返回</a>
+	<br />
+	<br />
+
+	<table
+		class="table-striped table-bordered table-hover  table-condensed">
+		<thead>
+			<th wdidth="30px" style="text-align: center;" hidden="true">patientId</th>
+			<th wdidth="50px" style="text-align: center;">id</th>
+			<th wdidth="70px" style="text-align: center;">姓名</th>
+			<th wdidth="70px" style="text-align: center;">联系方式</th>
+			<th wdidth="70px" style="text-align: center;">性别</th>
+			<th style="text-align: center;">操作</th>
+		</thead>
+		<tbody>
+			<tr th:each="patient : ${patients}">
+				<td th:text="${patient.patientId}" wdidth="20px" align="center" hidden="true"></td>
+				<td th:text="${patientStat.index+1}" wdidth="50px" align="center"></td>
+				<td th:text="${patient.name}" wdidth="70px" align="center"></td>
+				<td th:text="${patient.mobile}" wdidth="70px" align="center"></td>
+				<td th:text="${patient.sex==1?'男':'女'}" wdidth="70px" align="center"></td>
+				<td>
+					<button type="button" class="btn btn-primary"
+						th:onclick="'javascript:toEdit('+${patient.patientId}+')' ">信息修改</button>
+					<button type='button' class='btn btn-success'
+						th:onclick="'javascript:toFiles('+${patient.patientId}+')' ">历史病例</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+<script type="text/javascript">
+	function toEdit(patientId) {
+		window.location.href = "http://localhost:8080/hospital/toEditPatient?patientId="+ patientId;
+	};
+	function toFiles(patientId) {
+		window.location.href = "http://localhost:8080/hospital/toFiles?patientId="+ patientId;
+	};
+</script>
+</body>
+</html>

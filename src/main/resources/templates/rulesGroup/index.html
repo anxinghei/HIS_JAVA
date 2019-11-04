@@ -31,13 +31,13 @@
 				<td th:text="${groupStat.index+1}" width="20px" align="center"></td>
 				<td th:text="${group.title}" width="70px" align="center"></td>
 				<td>
-					<button type="button" class="btn btn-default btn-sm mr10 toEditName" data-toggle="modal"
+					<button type="button" class="btn btn-primary btn-sm mr10 toEditName" data-toggle="modal"
 						data-target="#editRuleGroup" th:if="${group.id!=1}" 
 						th:attr="data-id=${group.id}" >修改权限组名称</button>
-					<button type='button' class='btn btn-default btn-sm mr10 '
+					<button type='button' class='btn btn-warning btn-sm mr10 '
 						th:if="${group.id!=1}"
 						th:onclick="'javascript:toEdit('+${group.id}+')' ">修改权限</button>
-					<button type='button' class='btn btn-default btn-sm mr10 '
+					<button type='button' class='btn btn-danger btn-sm mr10 '
 						th:if="${group.id!=1}" th:onclick="'javascript:deleteGroup('+${group.id}+')' ">删除权限组</button>
 				</td>
 			</tr>
@@ -170,25 +170,7 @@
             }
 		};
 		function toEdit(id) {
-			var page = "toUpdateRules?id=" + id;
-			$.ajax({
-						type : "post",
-						url : page,
-						data : {
-							id : id
-						},
-						contentType : "application/json;charset=UTF-8",
-						success : function(result) {
-							window.location.href = "http://localhost:8080/hospital/toUpdateRules?id="
-									+ id;
-						},
-						error : function(result) {
-							alert("操作出错啦！请联系管理人员");
-						},
-						fail : function(result) {
-							alert("由于网络不顺畅等原因，无法执行本次操作");
-						}
-					});
+			window.location.href = "http://localhost:8080/hospital/toUpdateRules?id="+ id;
 		};
 	</script>
 </body>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>患者编辑</title>
+<script type="text/javascript" src="../../js/jquery.min.js"
+	th:src="@{/js/jquery.min.js}"></script>
+<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.min.css}" />
+<script type="text/javascript" src="../../js/bootstrap.min.js"
+	th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<br />
+	<a href="toPatients">返回</a>
+	<br />
+	<br />
+	<div class="panel pd10">
+		<h3 class="tit1 ftl">
+			<span class="blue mr10">基本信息</span>
+		</h3>
+		<div class="mt20 clearfix">
+			<!--                            <div class="input-group listSeaForm l" style="width: 30%; margin-right: 1%">-->
+			<!--将姓名框改为20%-->
+			<div class="input-group listSeaForm l"
+				style="width: 20%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">姓名：</span>
+				</span> <input class="form-control" name="name" id="name" type="text"
+					th:value="${patient.name}" maxlength="10 "
+					onkeyup="value=value.replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,'')"
+					onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,''))">
+			</div>
+			<!--                            <div class="input-group listSeaForm l"  style="width: 22%; margin-right: 1%">-->
+			<!--将性别框改为10%-->
+			<div class="input-group listSeaForm l"
+				style="width: 10%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">性别：</span>
+				</span> <select class="form-control" name="sex" id="sex">
+					<option th:value="1" th:selected="${patient.sex==1}"  th:text="男"></option>
+					<option th:value="2" th:selected="${patient.sex==2}"  th:text="女"></option>
+				</select>
+			</div>
+<!-- 			<div class="input-group listSeaForm l" style="width: 24%;"> -->
+<!-- 				<span class="input-group-btn"> <span class="btn">生日：</span> -->
+<!-- 				</span> <input class="form-control dateTime" id="birthday" name="birthday" -->
+<!-- 					type="text" th:value="${patient.birthday}"> <i -->
+<!-- 					class="fa fa-calendar"></i> -->
+<!-- 			</div> -->
+			<!--添加医保卡输入框-->
+			<div class="input-group listSeaForm l" style="width: 22%;">
+				<span class="input-group-btn"> <span class="btn">医保卡号：</span>
+				</span> <input class="form-control" type="text" name="mi_card" id="miCard"
+					th:value="${patient.miCard}">
+			</div>
+		</div><br>
+		<div class="mt10 clearfix">
+			<div class="input-group listSeaForm l"
+				style="width: 30%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">身高：</span>
+				</span> <input class="form-control" name="height" type="text" id="height"
+					th:value="${patientFile.height}"
+					onkeyup="value=value.replace(/[^\d^\.]+/g,'')"> <span
+					class="input-group-btn bc" style="padding: 0 8px"> <span
+					class="btn">厘米</span>
+				</span>
+			</div>
+			<div class="input-group listSeaForm l"
+				style="width: 22%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">体重：</span>
+				</span> <input class="form-control" name="weight" type="text" id="weight"
+					th:value="${patientFile.weight}"
+					onkeyup="value=value.replace(/[^\d^\.]+/g,'')"> <span
+					class="input-group-btn bc" style="padding: 0 8px"> <span
+					class="btn">公斤</span>
+				</span>
+			</div><br>
+
+			<div class="input-group listSeaForm l"
+				style="width: 23%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">血型：</span>
+				</span> <select class="form-control" name="blood_type" id="blood_type">
+					<option th:value="1" th:selected="${bloodType==1}"  th:text="A"></option>
+					<option th:value="2" th:selected="${bloodType==2}"  th:text="B"></option>
+					<option th:value="3" th:selected="${bloodType==3}"  th:text="AB"></option>
+					<option th:value="4" th:selected="${bloodType==4}"  th:text="O"></option>
+				</select>
+			</div>
+			<div class="input-group listSeaForm l" style="width: 22%;">
+				<select class="form-control" name="Rh" id="Rh">
+					<option th:value="1" th:selected="${RH==1}"  th:text="Rh阴性"></option>
+					<option th:value="2" th:selected="${RH==2}"  th:text="阳性"></option>
+				</select>
+			</div>
+		</div><br>
+		<div class="mt10 clearfix">
+			<div class="input-group listSeaForm l"
+				style="width: 24%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">左耳听力：</span>
+				</span> <select class="form-control" name="left_ear_hearing"
+					id="left_ear_hearing">
+					<option th:value="1" th:selected="${patientFile.leftEarHearing==1}"  th:text="正常"></option>
+					<option th:value="2" th:selected="${patientFile.leftEarHearing!=1}"  th:text="耳聋"></option>
+				</select>
+			</div>
+			<div class="input-group listSeaForm l"
+				style="width: 25%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">右耳听力：</span>
+				</span> <select class="form-control" name="right_ear_hearing"
+					id="right_ear_hearing">
+					<option th:value="1" th:selected="${patientFile.rightEarHearing==1}"  th:text="正常"></option>
+					<option th:value="2" th:selected="${patientFile.rightEarHearing!=1}"  th:text="耳聋"></option>
+				</select>
+			</div>
+
+			<div class="input-group listSeaForm l"
+				style="width: 24%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">左眼视力：</span>
+				</span> <input class="form-control" name="left_version" type="text" id="left_version"
+					th:value="${patientFile.leftVision}"
+					onkeyup="value=value.replace(/[^\d^\.]+/g,'')">
+			</div>
+			<div class="input-group listSeaForm l" style="width: 24%;">
+				<span class="input-group-btn"> <span class="btn">右眼视力：</span>
+				</span> <input class="form-control" name="right_version" type="text" id="right_version"
+					th:value="${patientFile.rightVision}"
+					onkeyup="value=value.replace(/[^\d^\.]+/g,'')">
+			</div>
+		</div><br>
+		<div class="mt10 clearfix">
+			<div class="input-group listSeaForm l"
+				style="width: 20%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">电话：</span>
+				</span> <input class="form-control" type="text"
+					th:value="${patient.mobile}"
+					disabled>
+			</div>
+			<div class="input-group listSeaForm l"
+				style="width: 29%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">身份证：</span>
+				</span> <input class="form-control" name="id_card" type="text" id="id_card"
+					th:value="${patient.idCard}"
+					maxlength="18"
+					onkeyup="value=value.replace(/[^\d^\.]+/g,'')">
+			</div>
+
+			<div class="input-group listSeaForm l" style="width: 49%;">
+				<span class="input-group-btn"> <span class="btn">住址：</span>
+				</span> <input class="form-control" name="address" type="text" id="address"
+					th:value="${patient.address}"
+					maxlength="100">
+			</div>
+		</div><br>
+		<div class="mt10 clearfix">
+			<div class="input-group listSeaForm l"
+				style="width: 20%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">紧急联系人：</span>
+				</span> <input class="form-control" name="emergency_contact_name"
+					type="text" id="emergency_contact_name" 
+					th:value="${patientFile.emergencyContactName}"
+					maxlength="10"
+					onkeyup="value=value.replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,'')"
+					onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,''))">
+			</div>
+			<div class="input-group listSeaForm l"
+				style="width: 29%; margin-right: 1%">
+				<span class="input-group-btn"> <span class="btn">关系：</span>
+				</span> <select class="form-control" name="emergency_contact_relation"
+					id="emergency_contact_relation">
+					<option th:value="1" th:selected="${patientFile.emergencyContactRelation==1}"  th:text="爸爸"></option>
+					<option th:value="2" th:selected="${patientFile.emergencyContactRelation==2}"  th:text="妈妈"></option>
+					<option th:value="3" th:selected="${patientFile.emergencyContactRelation==3}"  th:text="儿子"></option>
+					<option th:value="4" th:selected="${patientFile.emergencyContactRelation==4}"  th:text="女儿"></option>
+					<option th:value="5" th:selected="${patientFile.emergencyContactRelation==5}"  th:text="亲戚"></option>
+					<option th:value="6" th:selected="${patientFile.emergencyContactRelation==6}"  th:text="朋友"></option>
+				</select>
+			</div>
+
+			<div class="input-group listSeaForm l" style="width: 49%;">
+				<span class="input-group-btn"> <span class="btn">紧急联系人电话：</span>
+				</span> <input class="form-control" name="emergency_contact_mobile"
+					type="text" id="emergency_contact_mobile" 
+					th:value="${patientFile.emergencyContactMobile}"
+					maxlength="11" onkeyup="value=value.replace(/[^\d^\.]+/g,'')">
+			</div>
+		</div><br>
+		<h3 class="tit1 ftl mt20">
+			<span class="blue mr10">过敏史</span>
+		</h3>
+		<div class="mt10 clearfix">
+			<textarea class="form-control" id="allergy_info" name="allergy_info"
+				rows="2" maxlength="500" placeholder=""
+				th:text="${patient.allergyInfo}"></textarea>
+		</div>
+		<h3 class="tit1 ftl mt20">
+			<span class="blue mr10">个人史</span>
+		</h3>
+		<div class="mt10 clearfix">
+			<textarea class="form-control" id="personal_info"
+				name="personal_info" rows="2" maxlength="500" placeholder=""
+				th:text="${patientFile.personalInfo}"></textarea>
+		</div>
+		<h3 class="tit1 ftl mt20">
+			<span class="blue mr10">家族史</span>
+		</h3>
+		<div class="mt10 clearfix">
+			<textarea class="form-control" id="family_info" name="family_info"
+				rows="2" maxlength="500" placeholder=""
+				th:text="${patientFile.familyInfo}"></textarea>
+		</div>
+		<input type="hidden" name="patientId" id="patientId" th:value="${patient.patientId}">
+	</div>
+	<button type="button" class="btn btn-primary r edit" id="editPatient">保存</button><br />
+	<br />
+	
+<script type="text/javascript">
+$('#editPatient').click(function() {
+	var patientId = $("#patientId").val();
+	var name = $("#name").val();
+	var sex = $("#sex").val();
+	var id_card = $("#id_card").val();
+	var miCard = $("#miCard").val();
+	var address = $("#address").val();
+	var allergy_info = $("#allergy_info").val();
+	
+	var emergency_contact_name = $("#emergency_contact_name").val();
+	var emergency_contact_mobile = $("#emergency_contact_mobile").val();
+	var emergency_contact_relation = $("#emergency_contact_relation").val();
+	var left_ear_hearing = $("#left_ear_hearing").val();
+	var right_ear_hearing = $("#right_ear_hearing").val();
+	var left_version = $("#left_version").val();
+	var right_version = $("#right_version").val();
+	var height = $("#height").val();
+	var weight = $("#weight").val();
+	var blood_type = $("#blood_type").val();
+	var Rh = $("#Rh").val();
+	var personal_info = $("#personal_info").val();
+	var family_info = $("#family_info").val();
+	alert();
+	var page = "editGroupName/" + authGroup_id + "?title=" + title;
+	$.ajax({
+		type : "post",
+		url : page,
+		data : {
+			authGroup_id : authGroup_id,
+			title : title
+		},
+		contentType : "application/json;charset=UTF-8",
+		success : function(result) {
+			location.reload();
+			alert("权限组名称已修改");
+		},
+		error : function(result) {
+			alert("操作出错啦！请联系管理人员");
+		},
+		fail : function(result) {
+			alert("由于网络不顺畅等原因，无法执行本次操作");
+		}
+	});
+});
+</script>
+</body>
+</html>

@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.pojo.DzmPatient;
@@ -15,4 +18,16 @@ import com.example.demo.mapper.DzmPatientMapper;
  */
 @Service
 public class DzmPatientService  {
+	
+	@Autowired
+	private DzmPatientMapper patientMapper;
+	
+	public List<DzmPatient> getPatients(){
+		return patientMapper.selectAll();
+	}
+	
+	public DzmPatient getPatientById(int id) {
+		return patientMapper.selectByPrimaryKey(id);
+	}
+	
 }
