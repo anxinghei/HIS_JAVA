@@ -11,7 +11,7 @@
 <title>主页面</title>
 </head>
 <body>
-
+	<br/><br/>
 	<div class="row">
 		<div class="col-lg-1">
 			<h4 th:text="${member.userName}" style="color: green"></h4>
@@ -21,18 +21,29 @@
 				<a href="logout">退出登录</a>
 			</h4>
 		</div>
-	</div><br/><br/>
+	</div><br/>
 
-
-	<div shiro:hasPermission="Department:index">
-		<a href="toDept">科室管理</a><br />
-	</div><br/>
-	<div shiro:hasPermission="member:index">
-		<a href="toMembers">用户管理</a><br />
-	</div><br/>
-	<div shiro:hasPermission="AuthGroup:index">
-		<a href="toGroups">权限组修改</a><br />
-	</div><br/>
+<h1 style="color: red">诊所信息</h1>
+	<h3>
+		<div shiro:hasPermission="Patient:index">
+			<a href="toDept">患者库</a><br />
+		</div>
+	</h3>
+	<h3>
+		<div shiro:hasPermission="Department:index">
+			<a href="toDept">科室管理</a><br />
+		</div>
+	</h3>
+	<h3>医疗人员</h3>
+		<h5>
+			<div shiro:hasPermission="member:index">
+				<a href="toMembers">用户管理</a><br />
+			</div><br/>
+			<div shiro:hasPermission="AuthGroup:index">
+				<a href="toGroups">权限组修改</a><br />
+			</div><br/>
+		</h5>
+	
 
 </body>
 </html>

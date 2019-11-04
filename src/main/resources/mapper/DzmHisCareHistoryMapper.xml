@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.DzmHisCareHistoryMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.example.demo.pojo.DzmHisCareHistory" id="dzmHisCareHistoryMap">
+        <result property="id" column="id"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="doctorId" column="doctor_id"/>
+        <result property="patientId" column="patient_id"/>
+        <result property="departmentId" column="department_id"/>
+        <result property="typeId" column="type_id"/>
+        <result property="isContagious" column="is_contagious"/>
+        <result property="caseDate" column="case_date"/>
+        <result property="addtime" column="addtime"/>
+        <result property="caseCode" column="case_code"/>
+        <result property="caseTitle" column="case_title"/>
+        <result property="caseResult" column="case_result"/>
+        <result property="doctorTips" column="doctor_tips"/>
+        <result property="memo" column="memo"/>
+    </resultMap>
+
+</mapper>

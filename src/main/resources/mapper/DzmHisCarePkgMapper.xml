@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.DzmHisCarePkgMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.example.demo.pojo.DzmHisCarePkg" id="dzmHisCarePkgMap">
+        <result property="id" column="id"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="doctorId" column="doctor_id"/>
+        <result property="patientId" column="patient_id"/>
+        <result property="careHistoryId" column="care_history_id"/>
+        <result property="registrationId" column="registration_id"/>
+        <result property="orderCode" column="order_code"/>
+        <result property="amount" column="amount"/>
+        <result property="olPayPart" column="ol_pay_part"/>
+        <result property="typeId" column="type_id"/>
+        <result property="status" column="status"/>
+        <result property="addtime" column="addtime"/>
+        <result property="opPlace" column="op_place"/>
+    </resultMap>
+
+</mapper>
