@@ -25,4 +25,8 @@ public class DzmHisPatientFileService  {
 		record.setPatientId(id);
 		return patientFileMapper.selectOne(record);
 	}
+	
+	public void updatePatientFile(DzmHisPatientFile file) {
+		patientFileMapper.updateByPrimaryKeySelective(file);
+	}
 }

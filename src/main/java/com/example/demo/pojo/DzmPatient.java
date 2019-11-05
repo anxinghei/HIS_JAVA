@@ -65,6 +65,28 @@ public class DzmPatient implements Serializable {
     private Integer isDel;
 	
 
+	public DzmPatient() {
+		super();
+	}
+	public DzmPatient(Integer patientId, String name, Integer updateTime, Integer sex,
+				 String idCard, String miCard, String address, String allergyInfo) {
+			super();
+			this.patientId = patientId;
+			this.name = name;
+			this.updateTime = updateTime;
+			this.sex = sex;
+			this.idCard = idCard;
+			this.miCard = miCard;
+			this.address = address;
+			this.allergyInfo = allergyInfo;
+		}
+	@Override
+	public String toString() {
+		return "DzmPatient [patientId=" + patientId + ", name=" + name + ", mobile=" + mobile + ", updateTime="
+				+ updateTime + ", sex=" + sex + ", birthday=" + birthday + ", idCard=" + idCard + ", miCard=" + miCard
+				+ ", address=" + address + ", createTime=" + createTime + ", allergyInfo=" + allergyInfo + ", isDel="
+				+ isDel + "]";
+	}
 	/**
 	 * 设置：主键
 	 */

@@ -235,19 +235,41 @@ $('#editPatient').click(function() {
 	var Rh = $("#Rh").val();
 	var personal_info = $("#personal_info").val();
 	var family_info = $("#family_info").val();
-	alert();
-	var page = "editGroupName/" + authGroup_id + "?title=" + title;
+
+	var page = "editPatient/" + patientId + "?name=" + name+ "&sex=" + sex+ "&id_card=" + id_card+ "&miCard=" + miCard+ "&address=" + address
+			+ "&allergy_info=" + allergy_info+ "&emergency_contact_name=" + emergency_contact_name+ "&emergency_contact_mobile=" + emergency_contact_mobile
+			+ "&emergency_contact_relation=" + emergency_contact_relation+ "&left_ear_hearing=" + left_ear_hearing+ "&right_ear_hearing=" + right_ear_hearing
+			+ "&left_version=" + left_version+ "&right_version=" + right_version+ "&height=" + height+ "&weight=" + weight+ "&blood_type=" + blood_type
+			+ "&Rh=" + Rh+ "&personal_info=" + personal_info+ "&family_info=" + family_info;
 	$.ajax({
 		type : "post",
 		url : page,
 		data : {
-			authGroup_id : authGroup_id,
-			title : title
+			patientId : patientId,
+			name : name,
+			sex : sex,
+			id_card : id_card,
+			miCard : miCard,
+			address : address,
+			allergy_info : allergy_info,
+			emergency_contact_name : emergency_contact_name,
+			emergency_contact_mobile : emergency_contact_mobile,
+			emergency_contact_relation : emergency_contact_relation,
+			left_ear_hearing : left_ear_hearing,
+			right_ear_hearing : right_ear_hearing,
+			left_version : left_version,
+			right_version : right_version,
+			height : height,
+			weight : weight,
+			blood_type : blood_type,
+			Rh : Rh,
+			personal_info : personal_info,
+			family_info : family_info
 		},
 		contentType : "application/json;charset=UTF-8",
 		success : function(result) {
+			alert("患者信息已修改");
 			location.reload();
-			alert("权限组名称已修改");
 		},
 		error : function(result) {
 			alert("操作出错啦！请联系管理人员");

@@ -30,4 +30,7 @@ public class DzmPatientService  {
 		return patientMapper.selectByPrimaryKey(id);
 	}
 	
+	public void updetePatient(DzmPatient record) {
+		patientMapper.updateByPrimaryKeySelective(record);
+	}
 }

@@ -82,6 +82,39 @@ public class DzmHisPatientFile implements Serializable {
     private String familyInfo;
 	
 
+	public DzmHisPatientFile() {
+		super();
+	}
+	public DzmHisPatientFile(Integer fileId, Integer patientId, String emergencyContactName,
+				String emergencyContactMobile, Integer emergencyContactRelation, Integer leftEarHearing,
+				Integer rightEarHearing, BigDecimal leftVision, Integer updateTime, BigDecimal rightVision,
+				BigDecimal height, BigDecimal weight, String bloodType, String personalInfo, String familyInfo) {
+			super();
+			this.fileId = fileId;
+			this.patientId = patientId;
+			this.emergencyContactName = emergencyContactName;
+			this.emergencyContactMobile = emergencyContactMobile;
+			this.emergencyContactRelation = emergencyContactRelation;
+			this.leftEarHearing = leftEarHearing;
+			this.rightEarHearing = rightEarHearing;
+			this.leftVision = leftVision;
+			this.updateTime = updateTime;
+			this.rightVision = rightVision;
+			this.height = height;
+			this.weight = weight;
+			this.bloodType = bloodType;
+			this.personalInfo = personalInfo;
+			this.familyInfo = familyInfo;
+		}
+	@Override
+	public String toString() {
+		return "DzmHisPatientFile [patientId=" + patientId + ", emergencyContactName=" + emergencyContactName
+				+ ", emergencyContactMobile=" + emergencyContactMobile + ", emergencyContactRelation="
+				+ emergencyContactRelation + ", leftEarHearing=" + leftEarHearing + ", rightEarHearing="
+				+ rightEarHearing + ", leftVision=" + leftVision + ", updateTime=" + updateTime + ", rightVision="
+				+ rightVision + ", height=" + height + ", weight=" + weight + ", bloodType=" + bloodType
+				+ ", createTime=" + createTime + ", personalInfo=" + personalInfo + ", familyInfo=" + familyInfo + "]";
+	}
 	/**
 	 * 设置：主键
 	 */
